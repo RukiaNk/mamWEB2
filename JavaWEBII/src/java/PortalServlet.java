@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,14 +32,21 @@ public class PortalServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
+        
+        HttpSession session = request.getSession(false);
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            if (session != null) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Formulario</title>");            
-            out.println("</head>");
+            out.println("<link href=\"resources/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
+"<link rel=\"stylesheet\" href=\"resources/bootstrap/dist/css/bootstrap-reboot.min.css\" type=\"text/css\"/>\n" +
+"</head>");
             out.println("<body>");
+            out.println("<div class=\"container\" style=\"width: 400px; margin: 100px;\">");
             out.println("<form action=\"CadastrarUsuarioServlet\" method=\"POST\">");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"formGroupExampleInput\">Nome</label>");
@@ -53,11 +61,19 @@ public class PortalServlet extends HttpServlet {
             out.println("<input type=\"password\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Senha\">");
             out.println("</div>");
             out.println("<div>");
-            out.println("<a href=\"CadastrarUsuarioServlet\">Salvar</a>");
-            out.println("<a href=\"LogoutServlet\">Deslogar</a>");
-            out.println("</div>");
-            out.println("</form>");
+            out.println("<a href= \"CadastrarUsuarioServlet\" type=\"button\"  class=\"btn btn-success\" name=\"salvar\">Salvar</a>");
+            out.println("<a href= \"LogoutServlet\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\" >Sair</a>");
+            out.println("</div></div>");
+            out.println("</form></body>");
             out.println("</html>");
+            
+                }else{
+                    request.setAttribute("errorMessage", "No session.");
+                    request.getRequestDispatcher("ErroServlet").forward(
+                    request, response);
+            }
+            
+       
         }   
     }
 

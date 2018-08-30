@@ -31,12 +31,12 @@ public class LoginServlet extends HttpServlet {
         String p = request.getParameter("senha");
 
         if(ProjectDao.validaLogin(n, p)){
-        	request.getSession().setAttribute("name",n);
-        	response.sendRedirect("index.html");
+        	request.getSession().setAttribute("Name",n);
+        	response.sendRedirect("PortalServlet");
         }
         else{
             request.setAttribute("errorMessage", "Invalid Credentials!");
-            request.getRequestDispatcher("index.html").forward(
+            request.getRequestDispatcher("ErroServlet").forward(
                     request, response);
         }
 
