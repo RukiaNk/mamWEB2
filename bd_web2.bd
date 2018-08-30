@@ -1,0 +1,16 @@
+create database bd_web2;
+
+use bd_web2;
+
+create table tb_usuario(
+	id_usuario int primary key,
+    login_usuario varchar(50),
+    senha_usuario varchar(50),
+    nome_usuario varchar(100)
+
+);
+
+insert into tb_usuario
+values (1, 'ana', '123',' ana'),
+(2, 'marcos', '123',' marcos'),
+(3, 'michelly', '123',' michelly');
