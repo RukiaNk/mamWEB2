@@ -27,10 +27,10 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String n = request.getParameter("name");
+        String n = request.getParameter("login");
         String p = request.getParameter("senha");
 
-        if(LoginDAO.validate(n, p)){
+        if(ProjectDao.validaLogin(n, p)){
         	request.getSession().setAttribute("name",n);
         	response.sendRedirect("index.html");
         }

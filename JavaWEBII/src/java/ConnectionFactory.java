@@ -9,9 +9,9 @@ public class ConnectionFactory {
 
     //Preparando as variáveis de conexão
     final private String driver = "com.mysql.jdbc.Driver";
-    final private String url = "jdbc:mysql://localhost/ic";
+    final private String url = "jdbc:mysql://localhost/bd_web2";
     final private String usuario = "root";
-    final private String senha = "1234";
+    final private String senha = "";
     private Connection conexao;
     public Statement statement;
     public ResultSet resultset;
