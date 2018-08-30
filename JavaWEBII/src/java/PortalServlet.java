@@ -69,6 +69,7 @@ public class PortalServlet extends HttpServlet {
             
                 }else{
                     request.setAttribute("errorMessage", "No session.");
+                    request.setAttribute("page", "PortalServlet.java");
                     request.getRequestDispatcher("ErroServlet").forward(
                     request, response);
             }

@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             request.setAttribute("errorMessage", "Invalid Credentials!");
+            request.setAttribute("page", "index.html");
             request.getRequestDispatcher("ErroServlet").forward(
                     request, response);
         }
