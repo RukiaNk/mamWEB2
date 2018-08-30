@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,8 @@ public class PortalServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
+       
+        List<Usuario> lista = ProjectDao.getUsuarios();
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -64,17 +67,26 @@ public class PortalServlet extends HttpServlet {
             out.println("<a href= \"CadastrarUsuarioServlet\" type=\"button\"  class=\"btn btn-success\" name=\"salvar\">Salvar</a>");
             out.println("<a href= \"LogoutServlet\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\" >Sair</a>");
             out.println("</div></div>");
-            out.println("</form></body>");
+            out.println("</form>");
+            out.println("<div class=\"container\" style=\"width: 1000px; margin: 100px;\"><table class=\"table table-striped\">");
+            out.println("<thead>" +"<tr>" + "<th>Nome</th>" + "<th>Login</th>" +"<th>Senha</th>"+"</tr>"+"</thead>"+"<tbody>");           
+            for(Usuario cd : lista){
+                out.println("<tr>" +"<td>"+ cd.getNome()+"</td>");
+                out.println("<td>"+ cd.getLogin()+"</td>");
+                out.println("<td>"+ cd.getLogin()+"</td></tr>");
+            }
+            out.println("</tbody></table></div>");
+          
+            out.println("</body>");
             out.println("</html>");
+            
             
                 }else{
                     request.setAttribute("errorMessage", "No session.");
                     request.setAttribute("page", "PortalServlet.java");
                     request.getRequestDispatcher("ErroServlet").forward(
                     request, response);
-            }
-            
-       
+            }       
         }   
     }
 
