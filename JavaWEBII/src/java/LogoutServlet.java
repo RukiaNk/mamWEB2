@@ -36,8 +36,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         
             if (session != null) {
-                session.invalidate();
-            }
+                session.invalidate();}
             
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -48,6 +47,7 @@ public class LogoutServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
+            out.println("<a href= \"index.html\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\" >Sair</a>");
             out.println("</body>");
             out.println("</html>");
         }

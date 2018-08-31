@@ -4,12 +4,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author michellynk
  */
 public class Usuario {
+
     String nome, login, senha;
 
     public Usuario(String nome, String login, String senha) {
@@ -17,28 +17,28 @@ public class Usuario {
         this.login = login;
         this.senha = senha;
     }
-    
+
     public String getNome() {
-    return nome;
+        return nome;
     }
- 
+
     public String getLogin() {
-    return login;
+        return login;
     }
- 
+
     public String getSenha() {
-    return senha;
+        return senha;
     }
-    
-    public void setNome(String nomeUs){
-    this.nome = nomeUs;
+
+    public void setNome(String nomeUs) {
+        this.nome = nomeUs;
     }
-    
-    public void setLogin(String loginUs){
-    this.login = loginUs;
+
+    public void setLogin(String loginUs) {
+        this.login = loginUs;
     }
-        
-    public void setSenha(String senhaUs){
-    this.senha = senhaUs;
+
+    public void setSenha(String senhaUs) {
+        this.senha = senhaUs;
     }
 }

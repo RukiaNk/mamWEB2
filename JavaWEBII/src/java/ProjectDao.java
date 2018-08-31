@@ -27,7 +27,6 @@ public class ProjectDao {
                 Usuario u = new Usuario(nome, login, senha);
                 lista.add(u);
             }
-            conexao.desconecta();
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,9 +36,10 @@ public class ProjectDao {
 
     public void insere(Usuario newUser) {
         conexao.conectar();
-        conexao.selecionar("INSERT INTO usuario (nome, login, senha) "
-                + "VALUES (" + newUser.getNome()+ "," + newUser.getLogin() + "," + newUser.getSenha());
-        conexao.desconecta();
+        String sql = "INSERT INTO usuario (login, senha, nome) "                
+                + " VALUES ( '" + newUser.getLogin()+ "' , '" + newUser.getSenha()
+                +"', '" + newUser.getNome()+"' )";
+        conexao.atualizar(sql);
     }
 
     public static boolean validaLogin(String login, String senha) {

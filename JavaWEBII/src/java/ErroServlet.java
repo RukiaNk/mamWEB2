@@ -39,7 +39,8 @@ public class ErroServlet extends HttpServlet {
             out.println("<title>Servlet ErroServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ErroServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1> Erro na Servlet: " + request.getAttribute("errorMessage") + "</h1>");       
+            out.println("<a href= \"" + request.getAttribute("page") + "\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\">Voltar</a>");
             out.println("</body>");
             out.println("</html>");
         }

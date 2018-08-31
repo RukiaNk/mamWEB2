@@ -61,7 +61,7 @@ public class ConnectionFactory {
         try {
             statement.executeUpdate(sql);
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Não foi possivel executar o comando sql de atualização informado: " + ex);
+            System.out.println("Não foi possivel executar o comando sql de atualização informado: " + ex);
         }
     }
 }

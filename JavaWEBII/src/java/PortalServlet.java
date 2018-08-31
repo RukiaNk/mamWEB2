@@ -64,7 +64,7 @@ public class PortalServlet extends HttpServlet {
             out.println("<input type=\"password\" class=\"form-control\" id=\"senha\" placeholder=\"Senha\" name=\"senha\">");
             out.println("</div>");
             out.println("<div>");
-            out.println("<a href= \"CadastrarUsuarioServlet\" type=\"button\"  class=\"btn btn-success\" name=\"salvar\">Salvar</a>");
+            out.println("<input type=\"submit\"  class=\"btn btn-success\" name=\"salvar\">");
             out.println("<a href= \"LogoutServlet\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\" >Sair</a>");
             out.println("</div></div>");
             out.println("</form>");
