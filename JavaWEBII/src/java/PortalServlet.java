@@ -53,15 +53,15 @@ public class PortalServlet extends HttpServlet {
             out.println("<form action=\"CadastrarUsuarioServlet\" method=\"POST\">");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"formGroupExampleInput\">Nome</label>");
-            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Nome\">");
+            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Nome\" name=\"nome\">");
             out.println("</div>");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"formGroupExampleInput2\">Login</label>");
-            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Login\">");
+            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Login\" name=\"login\">");
             out.println("</div>");
             out.println("<div class=\"form-group\">");
             out.println("<label for=\"formGroupExampleInput2\">Senha</label>");
-            out.println("<input type=\"password\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Senha\">");
+            out.println("<input type=\"password\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Senha\" name=\"senha\">");
             out.println("</div>");
             out.println("<div>");
             out.println("<a href= \"CadastrarUsuarioServlet\" type=\"button\"  class=\"btn btn-success\" name=\"salvar\">Salvar</a>");
