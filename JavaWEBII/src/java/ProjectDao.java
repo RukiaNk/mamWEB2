@@ -37,8 +37,9 @@ public class ProjectDao {
 
     public void insere(Usuario newUser) {
         conexao.conectar();
-        conexao.selecionar("INSERT INTO usuario (login,senha,nome) "
-                + "VALUES (" + newUser.getLogin()+ "," + newUser.getSenha() + "," + newUser.getNome());
+        conexao.selecionar("INSERT INTO usuario (nome, login, senha) "
+                + "VALUES (" + newUser.getNome()+ "," + newUser.getLogin() + "," + newUser.getSenha());
+        System.out.println("DEU");
         conexao.desconecta();
     }
 
