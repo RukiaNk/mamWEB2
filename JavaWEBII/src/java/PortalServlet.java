@@ -52,16 +52,16 @@ public class PortalServlet extends HttpServlet {
             out.println("<div class=\"container\" style=\"width: 400px; margin: 100px;\">");
             out.println("<form action=\"CadastrarUsuarioServlet\" method=\"POST\">");
             out.println("<div class=\"form-group\">");
-            out.println("<label for=\"formGroupExampleInput\">Nome</label>");
-            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Nome\" name=\"nome\">");
+            out.println("<label for=\"nome\">Nome</label>");
+            out.println("<input type=\"text\" class=\"form-control\" id=\"nome\" placeholder=\"Nome\" name=\"nome\">");
             out.println("</div>");
             out.println("<div class=\"form-group\">");
-            out.println("<label for=\"formGroupExampleInput2\">Login</label>");
-            out.println("<input type=\"text\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Login\" name=\"login\">");
+            out.println("<label for=\"login\">Login</label>");
+            out.println("<input type=\"text\" class=\"form-control\" id=\"login\" placeholder=\"Login\" name=\"login\">");
             out.println("</div>");
             out.println("<div class=\"form-group\">");
-            out.println("<label for=\"formGroupExampleInput2\">Senha</label>");
-            out.println("<input type=\"password\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Senha\" name=\"senha\">");
+            out.println("<label for=\"senha\">Senha</label>");
+            out.println("<input type=\"password\" class=\"form-control\" id=\"senha\" placeholder=\"Senha\" name=\"senha\">");
             out.println("</div>");
             out.println("<div>");
             out.println("<a href= \"CadastrarUsuarioServlet\" type=\"button\"  class=\"btn btn-success\" name=\"salvar\">Salvar</a>");
@@ -73,7 +73,7 @@ public class PortalServlet extends HttpServlet {
             for(Usuario cd : lista){
                 out.println("<tr>" +"<td>"+ cd.getNome()+"</td>");
                 out.println("<td>"+ cd.getLogin()+"</td>");
-                out.println("<td>"+ cd.getLogin()+"</td></tr>");
+                out.println("<td>"+ cd.getSenha()+"</td></tr>");
             }
             out.println("</tbody></table></div>");
           

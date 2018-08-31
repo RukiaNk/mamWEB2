@@ -23,8 +23,8 @@ public class ProjectDao {
             while (conexao.resultset.next()) {
                 String nome = conexao.resultset.getString("nome");
                 String login = conexao.resultset.getString("login");
-                String pswd = conexao.resultset.getString("senha");
-                Usuario u = new Usuario(nome, login, pswd);
+                String senha = conexao.resultset.getString("senha");
+                Usuario u = new Usuario(nome, login, senha);
                 lista.add(u);
             }
             conexao.desconecta();

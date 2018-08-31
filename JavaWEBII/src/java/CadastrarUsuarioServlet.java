@@ -33,7 +33,7 @@ public class CadastrarUsuarioServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-
+        
         Usuario user = new Usuario(nome, login, senha);
 
         try {
