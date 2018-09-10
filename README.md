@@ -11,7 +11,7 @@ Matéria no moodle: https://www.tads.ufpr.br/course/view.php?id=273 <br />
 Exercícios:
 1 - https://docs.google.com/document/d/1jxPIBROy9_qfQsk7TeXSWKbVHDpmBvE0ijhJbV7DIts/edit <br />
 2 - https://docs.google.com/document/d/1dAyVQreatQMMxfmPNbthM8HW6mBxlRT56NwERpL-jhY/edit <br />
-3 - https://docs.google.com/document/d/11YkA_CyDF1a5LJJrkT-Lt3_I68Qfv43xpIqDTsc8J9s/edit <br />  
+3 - https://docs.google.com/document/d/11YkA_CyDF1a5LJJrkT-Lt3_I68Qfv43xpIqDTsc8J9s/edit <br />
 4 - https://docs.google.com/document/d/1ZayLY59UXI76E8KhCy8t31VLizGFNwIR3m33duI9OkE/edit <br />  
 
 <h2>Comandos gits:</h2> <br />
