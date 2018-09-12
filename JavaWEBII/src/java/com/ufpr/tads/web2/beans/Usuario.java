@@ -1,3 +1,5 @@
+package com.ufpr.tads.web2.beans;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.

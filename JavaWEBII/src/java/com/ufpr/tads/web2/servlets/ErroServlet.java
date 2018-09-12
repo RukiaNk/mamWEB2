@@ -1,3 +1,5 @@
+package com.ufpr.tads.web2.servlets;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author michellynk
+ * @author ananicole
  */
-@WebServlet(urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/ErroServlet"})
+public class ErroServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,22 +33,16 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session = request.getSession(false);
-        
-            if (session != null) {
-                session.invalidate();}
-            
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");            
+            out.println("<title>Servlet ErroServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
-            out.println("<a href= \"index.html\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\" >Sair</a>");
+            out.println("<h1> Erro na Servlet: " + request.getAttribute("errorMessage") + "</h1>");       
+            out.println("<a href= \"" + request.getAttribute("page") + "\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\">Voltar</a>");
             out.println("</body>");
             out.println("</html>");
         }
