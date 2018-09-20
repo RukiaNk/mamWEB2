@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-<%@include file="footer.jsp" %>
+<%@include file="erro.jsp" %>
     </body>
 </html>        
     </c:otherwise>    
