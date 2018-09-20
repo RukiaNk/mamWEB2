@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ufpr.tads.web2.beans.Usuario;
 import javax.servlet.*;
 
 
@@ -24,13 +25,12 @@ public class StartupServlet extends HttpServlet {
 ServletConfig configuracao ;
 
 
-  public void init(ServletConfig config)throws ServletException {
-
-    this.configuracao = config;
-
-    super.init(config);
-
-  }
+ public void init(ServletConfig config)
+            throws ServletException {
+        Usuario conf = new Usuario();
+        ServletContext ctx = config.getServletContext();
+        ctx.setAttribute("configuracao", conf);
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

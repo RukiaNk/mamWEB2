@@ -9,6 +9,7 @@ package com.ufpr.tads.web2.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,39 +20,22 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author michellynk
+ * @author ananicole
  */
 @WebServlet(urlPatterns = {"/LogoutServlet"})
 public class LogoutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            HttpSession session=request.getSession(true);
-            Enumeration attributeNames=session.getAttributeNames(); 
-            
-            while(attributeNames.hasMoreElements()) 
-            {
-                String name=(String)attributeNames.nextElement();
-                String value=session.getAttribute(name).toString();
-                session.removeAttribute(name);
-                
-                System.out.println(name+"="+value+"cleared");
-            }
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LogoutTestServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<center><h1>Deslogado com sucesso..</h1>");
-            out.println("<h2><a href=\"login.jsp\">Go to Login Page</a></h2></center>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+          HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
         }
+
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        request.setAttribute("msg", "Usuario desconectado com sucesso.");
+        rd.forward(request, response);
     }
 
 
