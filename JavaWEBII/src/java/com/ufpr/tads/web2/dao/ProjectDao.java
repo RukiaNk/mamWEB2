@@ -59,7 +59,7 @@ public class ProjectDao {
         }
     }
 
-    public static boolean validaLogin(String login, String senha) throws SQLException {
+    public boolean validaLogin(String login, String senha) throws SQLException {
         boolean isOk = false;
         List<Usuario> users = getUsuarios();
         for (Usuario u : users) {

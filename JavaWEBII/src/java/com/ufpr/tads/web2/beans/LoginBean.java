@@ -12,15 +12,13 @@ import java.io.Serializable;
  * @author ananicole
  */
 public class LoginBean implements Serializable {
-    private int id;
+    private String id;
     private String nome;
 
-    public LoginBean(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
+    public LoginBean() { //Construtor em Bean não tem parâmetros
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,7 +26,7 @@ public class LoginBean implements Serializable {
         this.nome = nome;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

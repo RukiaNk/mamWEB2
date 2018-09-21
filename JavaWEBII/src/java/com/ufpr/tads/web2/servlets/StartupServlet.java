@@ -15,22 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.ufpr.tads.web2.beans.Usuario;
 import javax.servlet.*;
 
-
 /**
  *
  * @author Marcos
  */
 @WebServlet(name = "StartupServlet", urlPatterns = {"/StartupServlet"})
 public class StartupServlet extends HttpServlet {
-ServletConfig configuracao ;
 
+    ServletConfig configuracao;
 
- public void init(ServletConfig config)
+    public void init(ServletConfig config)
             throws ServletException {
         Usuario conf = new Usuario();
         ServletContext ctx = config.getServletContext();
         ctx.setAttribute("configuracao", conf);
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,7 +39,7 @@ ServletConfig configuracao ;
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StartupServlet</title>");            
+            out.println("<title>Servlet StartupServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet StartupServlet at " + request.getContextPath() + "</h1>");

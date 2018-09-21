@@ -11,6 +11,9 @@ import com.ufpr.tads.web2.beans.Usuario;
 import com.ufpr.tads.web2.dao.ProjectDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,25 +39,22 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            ProjectDao dao = new ProjectDao();
-            Usuario p;
-            //marcos eu não sei porque ele ta dando erro aqui, porque na minha cabeça funciona
-            p = dao.validaLogin(request.getParameter("login"), senha); 
-       
-        if(!StringUtils.isNullOrEmpty(p.getNome())){
-            LoginBean user;
-                user = new LoginBean(p.getLogin(),p.getNome().toUpperCase() );
+            throws ServletException, IOException, SQLException {
+        ProjectDao dao = new ProjectDao();
+        //marcos eu não sei porque ele ta dando erro aqui, porque na minha cabeça funciona = Tu não tava fazendo request.getParameter pra senha
+        if (dao.validaLogin(request.getParameter("login"), request.getParameter("senha"))) {
+            LoginBean user = new LoginBean();
+            user.setId(request.getParameter("login"));
+            user.setNome(request.getParameter("nome"));
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("portal.jsp");
-        }
-        else{
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
             request.setAttribute("msg", "Usuário/Senha inválidos.");
             rd.forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,7 +69,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -83,7 +87,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
