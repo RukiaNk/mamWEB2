@@ -47,7 +47,10 @@ public class ClientesServlet extends HttpServlet {
             request.setAttribute("msg", "Usuario deve se autenticar para acessar o sistema.");
             rd.forward(request, response);
 
-        } else {
+        } else{
+        
+        }
+    }
 
             // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
             /**
@@ -65,7 +68,15 @@ public class ClientesServlet extends HttpServlet {
                         )
             throws ServletException
                         , IOException  {
-                processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
             }
 
             /**
@@ -83,7 +94,15 @@ public class ClientesServlet extends HttpServlet {
                         )
             throws ServletException
                         , IOException  {
-                processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
             }
 
             /**

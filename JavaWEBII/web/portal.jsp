@@ -20,21 +20,20 @@
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
                 <title>Portal</title>
             </head>
             <body class="bgimg">
+                <%@include file="menu.jsp" %>
                 <jsp:useBean id="user" class="com.ufpr.tads.web2.beans.LoginBean" scope="session"/>
-                <div class="container">
+                <div class="container" style="width: 400px; margin: 100px;">
                     <div class="row">
                         <div class="col offset-m3 m6">
-                            <h1 class="white-text">Portal</h1>
-                            <h2 class="white-text">Olá, <jsp:getProperty name="user" property="nome"/></h2>
+                            <h1 class="display-4">Portal</h1>
+                            <h2 class="lead" >Olá, <jsp:getProperty name="user" property="nome"/></h2>
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
-                            <div class="collection">
-                                <a href="ClientesServlet?action=list" class="collection-item">Cadastro de clientes</a>
-                                <a href="LogoutServlet" class="collection-item">Sair</a>
-                            </div>
                         </div>
                     </div>
                 </div>

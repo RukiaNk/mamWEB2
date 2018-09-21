@@ -4,12 +4,12 @@
     Author     : ananicole
 --%>
 
-<footer class="page-footer blue-grey footer waves-effect">
+<footer class="footer blue-grey  waves-effect">
     <div class="container">
-        <div class="row">
-            <h6>
-                Em caso de problemas contactar o administrador: <c:out value="${applicationScope.configuracao.email}" />
-            </h6>
+        <div class="container">
+            <span class="text-muted">
+              Em caso de problemas contactar o administrador: <c:out value="${applicationScope.configuracao.email}" />
+            </span>
         </div>
     </div>
 </footer>

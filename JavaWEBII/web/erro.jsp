@@ -12,18 +12,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
         <title>Error</title>
     </head>
     <body class="bgimg">
         <div class="container">
             <div class="row bordered">
                 <h1 class="red-text">
-                    <c:out value="${exception.message}" /></h1>
+                    <c:out value="${ (empty requestScope.msg) ? ((empty param.msg) ? '' : param.msg) : requestScope.msg }" />
                 <h2 class="red-text">
                     <c:out value="${pageContext.out()}" /><br/>
-                    <c:out value="${exception.printStackTrace(pageContext.response.writer)}" /><br/>
                 </h2>
-                <h3 class="white-text">Para voltar à Home <a href="index.html" class="black-text pulse"><strong>Clique aqui</strong></a>.</h3>
+                <h3 class="white-text">Para voltar à Home <a href="index.jsp" class="black-text pulse"><strong>Clique aqui</strong></a>.</h3>
             </div>
         </div>
 <%@include file="footer.jsp" %>
