@@ -49,29 +49,6 @@ public class ClientesServlet extends HttpServlet {
 
         } else {
 
-            String action = request.getParameter("action");
-            RequestDispatcher rd = null;
-            int id = 0;
-            List<Cliente> lista = null;
-            Cliente c = null;
-
-            //Identificação da action
-            if (!StringUtils.isNullOrEmpty(action)) {
-                switch (action) {
-                try {
-                            lista = ClienteFacade.selectAll();
-                        } catch (InstantiationException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                rd = request.getRequestDispatcher("clientesListar.jsp");
-                request.setAttribute("lista", lista);
-                rd.forward(request, response);
-            }
-
             // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
             /**
              * Handles the HTTP <code>GET</code> method.
