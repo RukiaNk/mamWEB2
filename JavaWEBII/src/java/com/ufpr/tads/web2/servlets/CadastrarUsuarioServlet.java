@@ -5,15 +5,19 @@ package com.ufpr.tads.web2.servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.ufpr.tads.web2.dao.ProjectDao;
 import com.ufpr.tads.web2.beans.Usuario;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.RequestDispatcher;
+
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author ananicole
@@ -32,12 +36,25 @@ public class CadastrarUsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        if (session == null || session.getAttribute("user") == null) {
+
+            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
+            request.setAttribute("msg", "Usuario deve se autenticar para acessar o sistema.");
+            rd.forward(request, response);
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
+        }
+
         response.setContentType("text/html;charset=UTF-8");
 
         String nome = request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-        
+
         Usuario user = new Usuario(nome, login, senha);
 
         try {

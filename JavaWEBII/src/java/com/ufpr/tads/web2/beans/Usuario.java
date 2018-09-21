@@ -10,41 +10,49 @@ package com.ufpr.tads.web2.beans;
  *
  * @author michellynk
  */
-public class Usuario {
+public class Usuario{
+    private int id;
+    private String login;
+    private String senha;
+    private String nome;
 
-    String nome, login, senha;
+    public Usuario() {
+    }
 
-    public Usuario(String nome, String login, String senha) {
-        this.nome = nome;
+    public Usuario(String login, String senha, String nome) {
         this.login = login;
         this.senha = senha;
+        this.nome = nome;
     }
-
-    public Usuario(String login, String toUpperCase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void setId(int id){
+        this.id = id;
     }
-
-    public String getNome() {
-        return nome;
+    
+    public void setLogin(String login){
+        this.login = login;
     }
-
-    public String getLogin() {
+    
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+    
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    
+    public int getId(){
+        return id;
+    }
+    public String getLogin(){
         return login;
     }
-
-    public String getSenha() {
+    public String getSenha(){
         return senha;
     }
 
-    public void setNome(String nomeUs) {
-        this.nome = nomeUs;
+    public String getNome(){
+        return nome;
     }
 
-    public void setLogin(String loginUs) {
-        this.login = loginUs;
-    }
-
-    public void setSenha(String senhaUs) {
-        this.senha = senhaUs;
-    }
 }

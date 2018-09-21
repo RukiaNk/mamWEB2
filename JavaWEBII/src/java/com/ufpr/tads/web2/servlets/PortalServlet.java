@@ -1,16 +1,12 @@
 package com.ufpr.tads.web2.servlets;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import com.ufpr.tads.web2.dao.ProjectDao;
 import com.ufpr.tads.web2.beans.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +28,10 @@ public class PortalServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         
         response.setContentType("text/html;charset=UTF-8");
         
@@ -74,11 +71,15 @@ public class PortalServlet extends HttpServlet {
             out.println("</form>");
             out.println("<div class=\"container\" style=\"width: 1000px; margin: 100px;\"><table class=\"table table-striped\">");
             out.println("<thead>" +"<tr>" + "<th>Nome</th>" + "<th>Login</th>" +"<th>Senha</th>"+"</tr>"+"</thead>"+"<tbody>");           
-            for(Usuario cd : lista){
+            lista.stream().map((cd) -> {
                 out.println("<tr>" +"<td>"+ cd.getNome()+"</td>");
-                out.println("<td>"+ cd.getLogin()+"</td>");
-                out.println("<td>"+ cd.getSenha()+"</td></tr>");
-            }
+                    return cd;
+                }).map((cd) -> {
+                    out.println("<td>"+ cd.getLogin()+"</td>");
+                    return cd;/*
+                    }).forEachOrdered((cd) -> {
+                    out.println("<td>"+ cd.getSenha()+"</td></tr>");*/
+                });
             out.println("</tbody></table></div>");
           
             out.println("</body>");
@@ -106,7 +107,11 @@ public class PortalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(PortalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -120,7 +125,11 @@ public class PortalServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(PortalServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

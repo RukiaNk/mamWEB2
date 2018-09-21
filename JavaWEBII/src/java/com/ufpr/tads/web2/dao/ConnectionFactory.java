@@ -14,26 +14,18 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author rafae
- */
+
 public class ConnectionFactory {
 
     public Connection getConnection() throws SQLException {
         try {
-            Properties prop = new Properties();
-
-            prop.load(getClass().getResourceAsStream("Source/ConnectionProperties.properties"));
-            String dbDriver = prop.getProperty("db.driver");
-            String dbUrl = prop.getProperty("db.url");
-            String dbUser = prop.getProperty("db.user");
-            String dbPwd = prop.getProperty("db.pwd");
+            String dbDriver = "com.mysql.jdbc.Driver";
+            String dbUrl = "jdbc:mysql://localhost/bd_web2";
+            String dbUser = "root";
+            String dbPwd = "";
             Class.forName(dbDriver);
             return DriverManager.getConnection(dbUrl, dbUser, dbPwd);
         } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
