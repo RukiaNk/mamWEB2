@@ -25,10 +25,12 @@ public class ProjectDao {
             ResultSet stmtResult = stmt.executeQuery();
             List<Usuario> lista = new ArrayList();
             while (stmtResult.next()) {
+                int id = stmtResult.getInt("id_usuario");
                 String nome = stmtResult.getString("nome_usuario");
                 String login = stmtResult.getString("login_usuario");
                 String senha = stmtResult.getString("senha_usuario");
-                Usuario u = new Usuario(nome, login, senha);
+                Usuario u = new Usuario(login, senha, nome);
+                u.setId(id);
                 lista.add(u);
             }
             return lista;
@@ -59,15 +61,13 @@ public class ProjectDao {
         }
     }
 
-    public boolean validaLogin(String login, String senha) throws SQLException {
-        boolean isOk = false;
+    public Usuario validaLogin(String login, String senha) throws SQLException {
         List<Usuario> users = getUsuarios();
         for (Usuario u : users) {
             if (login.equals(u.getLogin()) && senha.equals(u.getSenha())) {
-                isOk = true;
-                break;
+                return u;
             }
         }
-        return isOk;
+        return null;
     }
 }

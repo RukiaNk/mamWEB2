@@ -16,18 +16,19 @@
         </jsp:forward>
     </c:when>
     <c:otherwise>
-        <!DOCTYPE html>
+        <!DOCTYPE html>        
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <title>Portal</title>
             </head>
             <body class="bgimg">
+                <jsp:useBean id="user" class="com.ufpr.tads.web2.beans.LoginBean" scope="session"/>
                 <div class="container">
                     <div class="row">
                         <div class="col offset-m3 m6">
                             <h1 class="white-text">Portal</h1>
-                            <h2 class="white-text">Olá, ${user.nome}</h2>
+                            <h2 class="white-text">Olá, <jsp:getProperty name="user" property="nome"/></h2>
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
                             <div class="collection">

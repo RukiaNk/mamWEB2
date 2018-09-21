@@ -42,10 +42,11 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         ProjectDao dao = new ProjectDao();
         //marcos eu não sei porque ele ta dando erro aqui, porque na minha cabeça funciona = Tu não tava fazendo request.getParameter pra senha
-        if (dao.validaLogin(request.getParameter("login"), request.getParameter("senha"))) {
+        Usuario u = dao.validaLogin(request.getParameter("login"), request.getParameter("senha"));
+        if (u != null) {
             LoginBean user = new LoginBean();
-            user.setId(request.getParameter("login"));
-            user.setNome(request.getParameter("nome"));
+            user.setId(u.getId());
+            user.setNome(u.getNome());
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("portal.jsp");
