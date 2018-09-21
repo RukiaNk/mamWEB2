@@ -17,7 +17,7 @@ public class ProjectDao {
     public static List<Usuario> getUsuarios() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        String sql = ("SELECT * FROM usuario");
+        String sql = ("SELECT * FROM tb_usuario");
 
         try {
             conn = new ConnectionFactory().getConnection();
@@ -25,9 +25,9 @@ public class ProjectDao {
             ResultSet stmtResult = stmt.executeQuery();
             List<Usuario> lista = new ArrayList();
             while (stmtResult.next()) {
-                String nome = stmtResult.getString("nome");
-                String login = stmtResult.getString("login");
-                String senha = stmtResult.getString("senha");
+                String nome = stmtResult.getString("nome_usuario");
+                String login = stmtResult.getString("login_usuario");
+                String senha = stmtResult.getString("senha_usuario");
                 Usuario u = new Usuario(nome, login, senha);
                 lista.add(u);
             }
@@ -43,7 +43,7 @@ public class ProjectDao {
     public void insere(Usuario newUser) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO usuario (login, senha, nome) VALUES (?,?,?)";
+        String sql = "INSERT INTO tb_usuario (login_usuario, senha_usuario, nome_usuario) VALUES (?,?,?)";
         try {
             conn = new ConnectionFactory().getConnection();
             stmt = conn.prepareStatement(sql);

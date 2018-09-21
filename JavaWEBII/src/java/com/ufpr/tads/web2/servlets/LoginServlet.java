@@ -50,8 +50,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             response.sendRedirect("portal.jsp");
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
-            request.setAttribute("msg", "Usuário/Senha inválidos.");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            request.setAttribute("msg", "Usuario ou senha inválidos.");
             rd.forward(request, response);
         }
 

@@ -18,6 +18,10 @@ public class LoginBean implements Serializable {
     public LoginBean() { //Construtor em Bean não tem parâmetros
     }
 
+    public LoginBean(int id, String toUpperCase) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setId(String id) {
         this.id = id;
     }

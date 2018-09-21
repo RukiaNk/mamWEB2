@@ -1,10 +1,9 @@
-package com.ufpr.tads.web2.servlets;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.ufpr.tads.web2.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ananicole
  */
-@WebServlet(urlPatterns = {"/ErroServlet"})
-public class ErroServlet extends HttpServlet {
+@WebServlet(name = "RemoverClienteServlet", urlPatterns = {"/RemoverClienteServlet"})
+public class RemoverClienteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,11 +37,10 @@ public class ErroServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ErroServlet</title>");            
+            out.println("<title>Servlet RemoverClienteServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> Erro na Servlet: " + request.getAttribute("errorMessage") + "</h1>");       
-            out.println("<a href= \"" + request.getAttribute("page") + "\" type=\"button\"  class=\"btn btn-danger\" name=\"deslogar\">Voltar</a>");
+            out.println("<h1>Servlet RemoverClienteServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

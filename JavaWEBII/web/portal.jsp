@@ -31,7 +31,7 @@
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
                             <div class="collection">
-                                <a href="CadastrarUsuarioServlet?action=form" class="collection-item">Cadastro de clientes</a>
+                                <a href="ClientesServlet?action=list" class="collection-item">Cadastro de clientes</a>
                                 <a href="LogoutServlet" class="collection-item">Sair</a>
                             </div>
                         </div>
