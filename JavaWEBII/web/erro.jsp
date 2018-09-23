@@ -19,11 +19,7 @@
     <body class="bgimg">
         <div class="container">
             <div class="row bordered">
-                <h1 class="red-text">
-                    <c:out value="${ (empty requestScope.msg) ? ((empty param.msg) ? '' : param.msg) : requestScope.msg }" />
-                <h2 class="red-text">
-                    <c:out value="${pageContext.out()}" /><br/>
-                </h2>
+                <h1>Erro: <%=(request.getAttribute("msg"))%></h1>
                 <h3 class="white-text">Para voltar à Home <a href="index.jsp" class="black-text pulse"><strong>Clique aqui</strong></a>.</h3>
             </div>
         </div>

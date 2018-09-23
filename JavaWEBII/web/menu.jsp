@@ -15,7 +15,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="ClientesServlet">Cadastrar Cliente</a>
+        <a class="nav-link" href="inserir.jsp">Cadastrar Cliente</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="LogoutServlet">Sair</a>

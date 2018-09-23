@@ -8,6 +8,9 @@ package com.ufpr.tads.web2.servlets;
 import com.ufpr.tads.web2.dao.ProjectDao;
 import com.ufpr.tads.web2.beans.Usuario;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +38,7 @@ public class CadastrarUsuarioServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         HttpSession session = request.getSession();
 
@@ -45,25 +48,18 @@ public class CadastrarUsuarioServlet extends HttpServlet {
             request.setAttribute("msg", "Usuario deve se autenticar para acessar o sistema.");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("index.html");
-            rd.forward(request, response);
-        }
 
-        response.setContentType("text/html;charset=UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
 
-        String nome = request.getParameter("nome");
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
+            String nome = request.getParameter("nome");
+            String login = request.getParameter("login");
+            String senha = request.getParameter("senha");
 
-        Usuario user = new Usuario(nome, login, senha);
+            Usuario user = new Usuario(nome, login, senha);
 
-        try {
             ProjectDao dao = new ProjectDao();
             dao.insere(user);
-            response.sendRedirect("/JavaWEBII/PortalServlet");
-
-        } catch (Exception e) {
-            response.sendRedirect("/JavaWEBII/PortalServlet");
+            response.sendRedirect("portal.jsp");
 
         }
 
@@ -81,7 +77,11 @@ public class CadastrarUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -95,7 +95,11 @@ public class CadastrarUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
