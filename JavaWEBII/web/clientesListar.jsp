@@ -57,8 +57,8 @@
                                         <td>${aux.nomeCliente}</td>
                                         <td>${aux.emailCliente}</td>
                                         <td class="center-align" style="width: 220px;">
-                                            <a href="ClientesServlet?action=show&id=${aux.idCliente}" class="btn-floating pulse green opt"><i class="small material-icons white-text">visibility</i></a>
-                                            <a href="ClientesServlet?action=formUpdate&id=${aux.idCliente}" class="btn-floating pulse yellow opt"><i class="small material-icons white-text">edit</i></a>
+                                            <a href="VisualizarClienteServlet?id=${aux.idCliente}" class="btn-floating pulse green opt"><i class="small material-icons white-text">visibility</i></a>
+                                            <a href="FormAlterarClienteServlet?id=${aux.idCliente}" class="btn-floating pulse yellow opt"><i class="small material-icons white-text">edit</i></a>
                                             <a href="" onclick="confirmar(this,${aux.idCliente});" class="btn-floating pulse red opt"><i class="small material-icons white-text">delete</i></a>
                                         </td></tr>
                                 </c:forEach>
@@ -68,7 +68,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col left-align">
-                                        <a href="ClientesServlet?action=formNew" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
+                                        <a href="FormNovoClienteServlet" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
                                     </div>
                                     <div class="col offset-s6">
                                         <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right">arrow_back</i></a>                                

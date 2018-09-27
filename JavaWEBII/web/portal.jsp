@@ -34,6 +34,10 @@
                             <h2 class="lead" >Olá, <jsp:getProperty name="user" property="nome"/></h2>
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
+                            <div class="collection">
+                                <a href="ClientesServlet?action=list" class="collection-item">Cadastro de clientes</a>
+                                <a href="LogoutServlet" class="collection-item">Sair</a>
+                            </div>
                         </div>
                     </div>
                 </div>
