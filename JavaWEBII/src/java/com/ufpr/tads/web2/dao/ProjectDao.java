@@ -29,8 +29,11 @@ public class ProjectDao {
                 String nome = stmtResult.getString("nome_usuario");
                 String login = stmtResult.getString("login_usuario");
                 String senha = stmtResult.getString("senha_usuario");
-                Usuario u = new Usuario(login, senha, nome);
+                Usuario u = new Usuario();
                 u.setId(id);
+                u.setNome(nome);
+                u.setLogin(login);
+                u.setSenha(senha);
                 lista.add(u);
             }
             return lista;

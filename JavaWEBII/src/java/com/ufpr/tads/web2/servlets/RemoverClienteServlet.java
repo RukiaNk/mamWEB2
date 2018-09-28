@@ -5,8 +5,12 @@
  */
 package com.ufpr.tads.web2.servlets;
 
+import com.ufpr.tads.web2.dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,6 +45,21 @@ public class RemoverClienteServlet extends HttpServlet {
             rd.forward(request, response);
 
         } else {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ClienteDAO cDao = new ClienteDAO();
+            try {
+                cDao.deletarCliente(id);
+            } catch (SQLException ex) {
+                Logger.getLogger(RemoverClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(RemoverClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(RemoverClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("ClientesServlet");
+            rd.forward(request, response);
+            
         }
     }
 

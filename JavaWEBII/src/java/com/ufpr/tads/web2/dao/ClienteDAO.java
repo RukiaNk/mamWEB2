@@ -42,7 +42,11 @@ public class ClienteDAO {
             stmt = con.prepareStatement(SELECT_ALL);
             rs = stmt.executeQuery();
             while(rs.next()){
-                Cliente aux =  new Cliente(rs.getInt(1)),rs.getString(3),rs.getString(4));
+                Cliente aux =  new Cliente();
+                aux.setIdCliente(rs.getInt(1));
+                aux.setCpfCliente(rs.getString(2));
+                aux.setNomeCliente(rs.getString(3));
+                aux.setEmailCliente(rs.getString(4));
                 lista.add(aux);
             }
             rs.close();
@@ -66,11 +70,11 @@ public class ClienteDAO {
                     aux.setCpfCliente(rs.getString(2));
                     aux.setNomeCliente(rs.getString(3));
                     aux.setEmailCliente(rs.getString(4));
-                    aux.setDataCliente(DataUtil.formataDataSqlParaBean(rs.getDate(5)));                    
+                    aux.setDataCliente(rs.getString(5));                    
                     aux.setRuaCliente(rs.getString(6));
                     aux.setNrCliente(rs.getInt(7));
                     aux.setCepCliente(rs.getString(8));
-                    aux.setCidadeCliente(rs.getInt(9));
+                    aux.setCidadeCliente(rs.getString(9));
                     }
             }catch (Exception e) {
                 throw new RuntimeException(e);
@@ -87,11 +91,11 @@ public class ClienteDAO {
                     stmt.setString(1, cliente.getCpfCliente());
                     stmt.setString(2, cliente.getNomeCliente());
                     stmt.setString(3, cliente.getEmailCliente());
-                    stmt.setDate(4, DataUtil.formataDataBeanParaSql(cliente.getDateCliente()));
+                    stmt.setString(4, cliente.getDateCliente());
                     stmt.setString(5, cliente.getRuaCliente());
                     stmt.setInt(6, cliente.getNrCliente());
                     stmt.setString(7, cliente.getCepCliente());
-                    stmt.setInt(8, cliente.getCidadeCliente());
+                    stmt.setString(8, cliente.getCidadeCliente());
                     stmt.execute();
                     stmt.close();
             } catch (SQLException e) {
@@ -108,11 +112,11 @@ public class ClienteDAO {
                 stmt.setString(1, cliente.getCpfCliente());
                 stmt.setString(2, cliente.getNomeCliente());
                 stmt.setString(3, cliente.getEmailCliente());
-                stmt.setDate(4, DataUtil.formataDataBeanParaSql(cliente.getDateCliente()));
+                stmt.setString(4,cliente.getDateCliente());
                 stmt.setString(5, cliente.getRuaCliente());
                 stmt.setInt(6, cliente.getNrCliente());
                 stmt.setString(7, cliente.getCepCliente());
-                stmt.setInt(8, cliente.getCidadeCliente());
+                stmt.setString(8, cliente.getCidadeCliente());
                 stmt.setInt(9, cliente.getIdCliente());
                 stmt.executeUpdate();
                 stmt.close();

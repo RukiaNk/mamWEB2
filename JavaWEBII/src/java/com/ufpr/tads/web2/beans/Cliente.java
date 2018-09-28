@@ -18,23 +18,15 @@ public class Cliente implements Serializable{
     private String cpfCliente;
     private String nomeCliente;
     private String emailCliente;
-    private Date dataCliente;
+    private String dataCliente;
     private String ruaCliente;
     private int nrCliente;
     private String cepCliente;
-    private int cidadeCliente;
+    private String cidadeCliente;
 
     public Cliente(){
     }
-    
-    public Cliente(int idCliente, String cpfCliente, String nomeCliente, String emailCliente) {
-		super();
-		this.idCliente = idCliente;
-		this.cpfCliente = cpfCliente;
-		this.nomeCliente = nomeCliente;
-		this.emailCliente = emailCliente;
-	}
-
+   
 	public int getIdCliente() {
         return idCliente;
     }
@@ -67,7 +59,7 @@ public class Cliente implements Serializable{
         this.emailCliente = emailCliente;
     }
 
-    public Date getDateCliente(){
+    public String getDateCliente(){
         return dataCliente;
     }
 
@@ -78,7 +70,7 @@ public class Cliente implements Serializable{
         return data;
     }
 
-    public void setDataCliente(Date dataCliente) {
+    public void setDataCliente(String dataCliente) {
         this.dataCliente = dataCliente;
     }
 
@@ -106,11 +98,11 @@ public class Cliente implements Serializable{
         this.cepCliente = cepCliente;
     }
 
-    public int getCidadeCliente() {
+    public String getCidadeCliente() {
         return cidadeCliente;
     }
 
-    public void setCidadeCliente(int cidadeCliente) {
+    public void setCidadeCliente(String cidadeCliente) {
         this.cidadeCliente = cidadeCliente;
     }
     

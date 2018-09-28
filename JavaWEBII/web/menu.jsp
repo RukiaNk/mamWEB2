@@ -18,6 +18,9 @@
         <a class="nav-link" href="inserir.jsp">Cadastrar Cliente</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="ClientesServlet">Listar Clientes</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="LogoutServlet">Sair</a>
       </li>
     </ul>

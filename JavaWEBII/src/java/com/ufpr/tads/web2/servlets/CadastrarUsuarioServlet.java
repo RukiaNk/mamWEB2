@@ -55,8 +55,10 @@ public class CadastrarUsuarioServlet extends HttpServlet {
             String login = request.getParameter("login");
             String senha = request.getParameter("senha");
 
-            Usuario user = new Usuario(nome, login, senha);
-
+            Usuario user = new Usuario();
+            user.setLogin(nome);
+            user.setNome(login);
+            user.setSenha(senha);
             ProjectDao dao = new ProjectDao();
             dao.insere(user);
             response.sendRedirect("portal.jsp");

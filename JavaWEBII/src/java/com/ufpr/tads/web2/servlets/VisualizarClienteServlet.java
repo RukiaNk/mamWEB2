@@ -5,6 +5,8 @@
  */
 package com.ufpr.tads.web2.servlets;
 
+import com.ufpr.tads.web2.beans.Cliente;
+import com.ufpr.tads.web2.dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -42,6 +44,12 @@ public class VisualizarClienteServlet extends HttpServlet {
             rd.forward(request, response);
 
         } else {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ClienteDAO cDao = new ClienteDAO();
+            Cliente c = cDao.buscarCliente(id);
+            request.setAttribute("cli", c);
+            RequestDispatcher rd = request.getRequestDispatcher("clientesVisualizar.jsp");
+            rd.forward(request, response);
         }
     }
 

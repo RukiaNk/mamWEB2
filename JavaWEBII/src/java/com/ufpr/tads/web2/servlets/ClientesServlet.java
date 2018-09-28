@@ -9,6 +9,7 @@ package com.ufpr.tads.web2.servlets;
 // import com.mysql.cj.util.StringUtils;
 import com.mysql.jdbc.StringUtils;
 import com.ufpr.tads.web2.beans.Cliente;
+import com.ufpr.tads.web2.dao.ClienteDAO;
 //import com.ufpr.tads.web2.facade.ClienteFacade;
 //import com.ufpr.tads.web2.facade.EnderecoFacade;
 
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,7 +33,7 @@ import javax.servlet.http.HttpSession;
  * @author ananicole
  */
 @WebServlet(name = "ClientesServlet", urlPatterns = {"/ClientesServlet"})
-public class ClientesServlet extends HttpServlet {
+public class ClientesServlet extends HttpServlet{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +45,7 @@ public class ClientesServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, ParseException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException{
 
         HttpSession session = request.getSession();
 
@@ -57,33 +59,24 @@ public class ClientesServlet extends HttpServlet {
   //Início Controller
         
         //Variaveis de controle
-        String action = request.getParameter("action");
         RequestDispatcher rd = null;
         int id = 0;
         List<Cliente> lista = null;
         Cliente c = null;
         
-        //Identificação da action
-        if(!StringUtils.isNullOrEmpty(action)){
-            switch(action){
-
-                //Listar clientes do banco de dados
-                case "list":
-                try {
-                    lista = cliente.selectAll();
-                } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        ClienteDAO clientes = new ClienteDAO();
+            try {
+                lista = clientes.listarClientes();
+            } catch (InstantiationException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     rd = request.getRequestDispatcher("clientesListar.jsp");
                     request.setAttribute("lista", lista);
                     rd.forward(request, response);                
-                    break;
-        }
-    }
+    }}
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -105,8 +98,6 @@ public class ClientesServlet extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -131,8 +122,6 @@ public class ClientesServlet extends HttpServlet {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -147,3 +136,4 @@ public class ClientesServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

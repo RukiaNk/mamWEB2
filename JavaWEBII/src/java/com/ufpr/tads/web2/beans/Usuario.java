@@ -1,4 +1,4 @@
-package com.ufpr.tads.web2.beans;
+    package com.ufpr.tads.web2.beans;
 
 
 /*
@@ -17,12 +17,6 @@ public class Usuario{
     private String nome;
 
     public Usuario() {
-    }
-
-    public Usuario(String login, String senha, String nome) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
     }
     
     public void setId(int id){

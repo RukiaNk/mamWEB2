@@ -25,7 +25,9 @@
         <!DOCTYPE html>
         <html>
             <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">s
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
                 <title>Portal</title>
             </head>
             <body class="bgimg">
@@ -59,7 +61,7 @@
                                         <td class="center-align" style="width: 220px;">
                                             <a href="VisualizarClienteServlet?id=${aux.idCliente}" class="btn-floating pulse green opt"><i class="small material-icons white-text">visibility</i></a>
                                             <a href="FormAlterarClienteServlet?id=${aux.idCliente}" class="btn-floating pulse yellow opt"><i class="small material-icons white-text">edit</i></a>
-                                            <a href="" onclick="confirmar(this,${aux.idCliente});" class="btn-floating pulse red opt"><i class="small material-icons white-text">delete</i></a>
+                                            <a href="RemoverClienteServlet?id=${aux.idCliente}" class="btn-floating pulse red opt"><i class="small material-icons white-text">delete</i></a>
                                         </td></tr>
                                 </c:forEach>
                                 </tbody>
@@ -68,10 +70,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col left-align">
-                                        <a href="FormNovoClienteServlet" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
+                                        <a href="FormNovoClienteServlet" class="waves-effect waves-teal btn">Novo<i class="material-icons right"></i></a>                                
                                     </div>
                                     <div class="col offset-s6">
-                                        <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right">arrow_back</i></a>                                
+                                        <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right"></i></a>                                
                                     </div>
                                 </div>
                             </div>
