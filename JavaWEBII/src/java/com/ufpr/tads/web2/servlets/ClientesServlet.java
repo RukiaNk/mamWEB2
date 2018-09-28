@@ -70,7 +70,7 @@ public class ClientesServlet extends HttpServlet {
                 //Listar clientes do banco de dados
                 case "list":
                 try {
-                    lista = ClienteFacade.selectAll();
+                    lista = cliente.selectAll();
                 } catch (InstantiationException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
