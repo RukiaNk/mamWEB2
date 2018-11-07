@@ -6,8 +6,12 @@
 package com.ufpr.tads.web2.beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,11 +22,13 @@ public class Cliente implements Serializable{
     private String cpfCliente;
     private String nomeCliente;
     private String emailCliente;
-    private String dataCliente;
+    private LocalDate dataCliente;
     private String ruaCliente;
     private int nrCliente;
     private String cepCliente;
     private String cidadeCliente;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//private DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
     public Cliente(){
     }
@@ -59,21 +65,22 @@ public class Cliente implements Serializable{
         this.emailCliente = emailCliente;
     }
 
-    public String getDateCliente(){
-        return dataCliente;
-    }
-
     public String getDataCliente() {
         //Formatando data do bean
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd"); 
-        String data = fmt.format(this.dataCliente);
+        String data = dtf.format(this.dataCliente);
         return data;
     }
 
     public void setDataCliente(String dataCliente) {
-        this.dataCliente = dataCliente;
+        LocalDate d = LocalDate.parse(dataCliente, dtf);
+        this.dataCliente = d;
     }
 
+    public void setDataCliente(java.sql.Date dataCliente) {
+        LocalDate d = dataCliente.toLocalDate();
+        this.dataCliente = d;
+    }
+    
     public String getRuaCliente() {
         return ruaCliente;
     }
