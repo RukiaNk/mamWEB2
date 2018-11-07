@@ -5,14 +5,9 @@
  */
 package com.ufpr.tads.web2.servlets;
 
-
-// import com.mysql.cj.util.StringUtils;
-import com.mysql.jdbc.StringUtils;
+import com.mysql.cj.util.StringUtils;
 import com.ufpr.tads.web2.beans.Cliente;
-import com.ufpr.tads.web2.dao.ClienteDAO;
-//import com.ufpr.tads.web2.facade.ClienteFacade;
-//import com.ufpr.tads.web2.facade.EnderecoFacade;
-
+import com.ufpr.tads.web2.facade.ClienteFacade;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
@@ -23,7 +18,6 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,7 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author ananicole
  */
 @WebServlet(name = "ClientesServlet", urlPatterns = {"/ClientesServlet"})
-public class ClientesServlet extends HttpServlet{
+public class ClientesServlet extends BeanServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,9 +37,13 @@ public class ClientesServlet extends HttpServlet{
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
+     * @throws java.text.ParseException
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException{
+            throws ServletException, IOException, ClassNotFoundException, SQLException, ParseException {
 
         HttpSession session = request.getSession();
 
@@ -56,27 +54,158 @@ public class ClientesServlet extends HttpServlet{
             rd.forward(request, response);
 
         } else {
-  //Início Controller
-        
-        //Variaveis de controle
-        RequestDispatcher rd = null;
-        int id = 0;
-        List<Cliente> lista = null;
-        Cliente c = null;
-        
-        ClienteDAO clientes = new ClienteDAO();
-            try {
-                lista = clientes.listarClientes();
-            } catch (InstantiationException ex) {
-                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+
+            //Início Controller
+            //Variaveis de controle
+            String action = request.getParameter("action");
+            RequestDispatcher rd = null;
+            int id = 0;
+            List<Cliente> lista = null;
+            Cliente c = null;
+
+            //Identificação da action
+            if (!StringUtils.isNullOrEmpty(action)) {
+                switch (action) {
+                    case "show":
+                        id = parseInt((String) request.getParameter("id"));
+                        if (id > 0) {
+                            Cliente cliente = ClienteFacade.select(id);
+
+                            try {
+                                //Carregar lista de estados
+                                // List<Estado> estados = EnderecoFacade.listarEstados();
+                                //Carregar cidade do cliente
+                                //Cidade cidade = EnderecoFacade.buscarCidade(cliente.getCidadeCliente());
+
+                                rd = request.getRequestDispatcher("clientesVisualizar.jsp");
+                                request.setAttribute("estados", estados);
+                                request.setAttribute("estado", (cidade.getIdEstado() - 1));
+                                request.setAttribute("cidade", cidade);
+                                request.setAttribute("visualizar", true);
+                                request.setAttribute("cliente", cliente);
+                                rd.forward(request, response);
+                            } catch (InstantiationException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
+
+                    case "formUpdate":
+                        //Busca id do cliente a ser visualizado no parametro da página
+                        id = parseInt((String) request.getParameter("id"));
+                        if (id > 0) {
+                            Cliente cliente = ClienteFacade.select(id);
+
+                            try {
+                                //Carregar lista de estados
+                                List<Estado> estados = EnderecoFacade.listarEstados();
+                                //Carregar cidade do cliente
+                                Cidade cidade = EnderecoFacade.buscarCidade(cliente.getCidadeCliente());
+
+                                rd = request.getRequestDispatcher("clientesAlterar.jsp");
+                                request.setAttribute("estados", estados);
+                                request.setAttribute("estado", (cidade.getIdEstado() - 1));
+                                request.setAttribute("cidade", cidade);
+                                request.setAttribute("alterar", true);
+                                request.setAttribute("cliente", cliente);
+                                rd.forward(request, response);
+                            } catch (InstantiationException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
+
+                    case "remove":
+                        //Busca id do cliente a ser removido no parametro da página
+                        id = parseInt((String) request.getParameter("id"));
+                        if (id > 0) {
+                            try {
+                                ClienteFacade.delete(id);
+                            } catch (InstantiationException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                            rd = request.getRequestDispatcher("ClientesServlet?action=list");
+                            rd.forward(request, response);
+                        }
+                        break;
+
+                    case "update":
+                        //Preencher dados do cliente no enviados pelo formulário
+                        c = super.fillCliente(request);
+                        ClienteFacade.update(c);
+                        rd = request.getRequestDispatcher("ClientesServlet?action=list");
+                        rd.forward(request, response);
+                        break;
+
+                    case "formNew":
+                        //Carregar lista de estados
+                        List<Estado> estados;
+                        try {
+                            estados = EnderecoFacade.listarEstados();
+                            rd = request.getRequestDispatcher("clientesNovo.jsp");
+                            request.setAttribute("estados", estados);
+                            rd.forward(request, response);
+                        } catch (InstantiationException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                        break;
+
+                    case "new":
+                        //Preencher dados do cliente no enviados pelo formulário
+                        c = super.fillCliente(request);
+                        try {
+                            ClienteFacade.insert(c);
+                        } catch (InstantiationException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        rd = request.getRequestDispatcher("ClientesServlet?action=list");
+                        rd.forward(request, response);
+                        break;
+
+                    default:
+                        break;
+                }
+            } else {
+                //Por default, a controller lista os clientes
+                try {
+                    lista = ClienteFacade.selectAll();
+                } catch (InstantiationException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                rd = request.getRequestDispatcher("clientesListar.jsp");
+                request.setAttribute("lista", lista);
+                rd.forward(request, response);
             }
-                    rd = request.getRequestDispatcher("clientesListar.jsp");
-                    request.setAttribute("lista", lista);
-                    rd.forward(request, response);                
-    }}
-    
+
+            //Fim Controller
+        }
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -88,16 +217,15 @@ public class ClientesServlet extends HttpServlet{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request,
-            HttpServletResponse response
-    )
-            throws ServletException,
-             IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -111,16 +239,15 @@ public class ClientesServlet extends HttpServlet{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request,
-            HttpServletResponse response
-    )
-            throws ServletException,
-             IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -136,4 +263,3 @@ public class ClientesServlet extends HttpServlet{
     }// </editor-fold>
 
 }
-
