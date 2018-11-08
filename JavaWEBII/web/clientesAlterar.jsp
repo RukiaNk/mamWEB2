@@ -31,7 +31,7 @@
                                 <div class="card-title center-align">
                                     <h3>Dados do cliente</h3>
                                 </div>
-                                <form action="AlterarClienteServlet" method="post">
+                                <form action="ClientesServlet?action=update" method="post">
                                     <div class="col m6">
                                         <input type="hidden" name="id" value=${cli.idCliente}>
                                         <label>Nome:</label><input type="text" required

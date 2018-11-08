@@ -79,7 +79,7 @@ public class ClienteDAO {
                 aux.setRuaCliente(rs.getString(6));
                 aux.setNrCliente(rs.getInt(7));
                 aux.setCepCliente(rs.getString(8));
-                aux.setCidadeCliente(rs.getString(9));
+                aux.setIdCidade(rs.getInt(9));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -104,7 +104,7 @@ public class ClienteDAO {
             stmt.setString(5, cliente.getRuaCliente());
             stmt.setInt(6, cliente.getNrCliente());
             stmt.setString(7, cliente.getCepCliente());
-            stmt.setString(8, cliente.getCidadeCliente());
+            stmt.setInt(8, cliente.getIdCidade());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
@@ -129,7 +129,7 @@ public class ClienteDAO {
             stmt.setString(5, cliente.getRuaCliente());
             stmt.setInt(6, cliente.getNrCliente());
             stmt.setString(7, cliente.getCepCliente());
-            stmt.setString(8, cliente.getCidadeCliente());
+            stmt.setInt(8, cliente.getIdCidade());
             stmt.setInt(9, cliente.getIdCliente());
             stmt.executeUpdate();
             stmt.close();

@@ -5,8 +5,12 @@
  */
 package com.ufpr.tads.web2.facade;
 
+import com.ufpr.tads.web2.beans.Cidade;
 import com.ufpr.tads.web2.beans.Cliente;
+import com.ufpr.tads.web2.beans.Estado;
+import com.ufpr.tads.web2.dao.CidadeDAO;
 import com.ufpr.tads.web2.dao.ClienteDAO;
+import com.ufpr.tads.web2.dao.EstadoDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author ananicole
  */
-class ClienteFacade implements Serializable {
+public class ClienteFacade implements Serializable {
 
     public static List<Cliente> selectAll() throws InstantiationException, IllegalAccessException {
         //Busca lista de clientes no banco de dados e retorna um List<Cliente>
@@ -59,4 +63,13 @@ class ClienteFacade implements Serializable {
         }
     }
 
+    public static List<Estado> listarEstados() throws SQLException {
+        EstadoDAO eDao = new EstadoDAO();
+        return eDao.listarEstados();
+    }
+
+    public static Cidade buscarCidade(int id) throws SQLException {
+        CidadeDAO cDao = new CidadeDAO();
+        return cDao.buscaCidade(id);
+    }
 }

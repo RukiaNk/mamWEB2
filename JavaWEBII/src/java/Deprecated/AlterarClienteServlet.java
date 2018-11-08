@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ufpr.tads.web2.servlets;
+package Deprecated;
 
 import com.ufpr.tads.web2.beans.Cliente;
 import com.ufpr.tads.web2.dao.ClienteDAO;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Marcos
  */
-@WebServlet(name = "FormNovoClienteServlet", urlPatterns = {"/FormNovoClienteServlet"})
-public class FormNovoClienteServlet extends HttpServlet {
+@WebServlet(name = "AlterarClienteServlet", urlPatterns = {"/AlterarClienteServlet"})
+public class AlterarClienteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +44,19 @@ public class FormNovoClienteServlet extends HttpServlet {
             rd.forward(request, response);
 
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("clientesNovo.jsp");
+            ClienteDAO cDao = new ClienteDAO();
+            Cliente c = new Cliente();
+            c.setIdCliente(Integer.parseInt(request.getParameter("id")));
+            c.setNomeCliente(request.getParameter("nome"));
+            c.setCpfCliente(request.getParameter("cpf"));
+            c.setEmailCliente(request.getParameter("email"));
+            c.setDataCliente(request.getParameter("data"));
+            c.setRuaCliente(request.getParameter("rua"));
+            c.setCidadeCliente(request.getParameter("cidade"));
+            c.setCepCliente(request.getParameter("cep"));
+            c.setNrCliente(Integer.parseInt(request.getParameter("numero")));
+            cDao.alterarCliente(c);
+            RequestDispatcher rd = request.getRequestDispatcher("ClientesServlet");
             rd.forward(request, response);
         }
     }

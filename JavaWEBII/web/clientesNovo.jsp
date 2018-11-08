@@ -31,7 +31,7 @@
                                 <div class="card-title center-align">
                                     <h3>Dados do cliente:</h3>
                                 </div>
-                                <form action="NovoClienteServlet" method="post">
+                                <form action="ClientesServlet&action=new" method="post">
                                     <div class="col m6">
                                         <label>Nome:</label><input type="text" required
                                                                    name="nome" size="100" maxlength="100" />

@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  *
  * @author ananicole
  */
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
+
     private int idCliente;
     private String cpfCliente;
     private String nomeCliente;
@@ -26,14 +27,14 @@ public class Cliente implements Serializable{
     private String ruaCliente;
     private int nrCliente;
     private String cepCliente;
-    private String cidadeCliente;
+    private int idCidade;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //private DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Cliente(){
+    public Cliente() {
     }
-   
-	public int getIdCliente() {
+
+    public int getIdCliente() {
         return idCliente;
     }
 
@@ -80,7 +81,7 @@ public class Cliente implements Serializable{
         LocalDate d = dataCliente.toLocalDate();
         this.dataCliente = d;
     }
-    
+
     public String getRuaCliente() {
         return ruaCliente;
     }
@@ -105,12 +106,12 @@ public class Cliente implements Serializable{
         this.cepCliente = cepCliente;
     }
 
-    public String getCidadeCliente() {
-        return cidadeCliente;
+    public int getIdCidade() {
+        return idCidade;
     }
 
-    public void setCidadeCliente(String cidadeCliente) {
-        this.cidadeCliente = cidadeCliente;
+    public void setIdCidade(int idCidade) {
+        this.idCidade = idCidade;
     }
-    
+
 }
