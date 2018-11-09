@@ -12,10 +12,10 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="portal.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="inserir.jsp">Cadastrar Cliente</a>
+        <a class="nav-link" href="clientesNovo.jsp">Cadastrar Cliente</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="ClientesServlet?action=list">Listar Clientes</a>

@@ -30,14 +30,14 @@
             </head>
             <%@include file="menu.jsp" %>
             <body class="bgimg">
-                <div class="container">
+                <div class="container" >
                     <div class="row">           
-                        <div class="container">
+                        <div class="container pt-4">
                             <h1 class="jumbotron-heading">Olá, ${user.nome}</h1>
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
                             <div class="collection">
-                                <a href="inserir.jsp" class="collection-item btn btn-primary my-2">Cadastro de clientes</a>
+                                <a href="inserir.jsp" class="collection-item btn btn-primary my-2">Cadastro de Usuários</a>
                                 <a href="LogoutServlet" class="collection-item btn btn-secondary my-2">Sair</a>
                             </div>
                         </div>

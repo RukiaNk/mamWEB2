@@ -37,15 +37,15 @@
             </head>
             <body class="bgimg">
                 <%@include file="menu.jsp" %>
-                <div class="container">
+                <div class="container" >
                     <div class="row">
                         <div class="col m12">
                             <div class="divider"></div>
-                                <div class="card-content">
-                                    <span class="card-title center-align"><h3>Cadastro de Clientes</h3></span>
+                                <div class="card-content pt-4">
+                                    <span class="card-title center-align"><h3>Clientes</h3></span>
                                 </div>
                             </div>
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>CPF</th>
