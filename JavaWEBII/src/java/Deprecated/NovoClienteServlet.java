@@ -57,13 +57,7 @@ public class NovoClienteServlet extends HttpServlet {
             c.setCidadeCliente(request.getParameter("cidade"));
             c.setCepCliente(request.getParameter("cep"));
             c.setNrCliente(Integer.parseInt(request.getParameter("numero")));
-            try {
-                cDao.adicionarCliente(c);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(NovoClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(NovoClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            cDao.adicionarCliente(c);
             RequestDispatcher rd = request.getRequestDispatcher("ClientesServlet");
             rd.forward(request, response);
         }

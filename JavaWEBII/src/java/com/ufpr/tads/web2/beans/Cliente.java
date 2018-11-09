@@ -28,6 +28,7 @@ public class Cliente implements Serializable {
     private int nrCliente;
     private String cepCliente;
     private int idCidade;
+    private String Cidade;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //private DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -112,6 +113,10 @@ public class Cliente implements Serializable {
 
     public void setIdCidade(int idCidade) {
         this.idCidade = idCidade;
+    }
+
+    public void setCidadeCliente(String Cidade) {
+        this.Cidade = Cidade;
     }
 
 }

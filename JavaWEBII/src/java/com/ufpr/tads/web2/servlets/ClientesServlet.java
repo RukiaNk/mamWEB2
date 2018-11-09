@@ -122,7 +122,7 @@ public class ClientesServlet {
 
                     case "update":
                         //Preencher dados do cliente no enviados pelo formulário
-                        c = super.fillCliente(request);
+                      //  c = super.fillCliente(request);
                         ClienteFacade.update(c);
                         rd = request.getRequestDispatcher("ClientesServlet?action=list");
                         rd.forward(request, response);
@@ -140,7 +140,7 @@ public class ClientesServlet {
 
                     case "new":
                         //Preencher dados do cliente no enviados pelo formulário
-                        c = super.fillCliente(request);
+                      //  c = super.fillCliente(request);
                         try {
                             ClienteFacade.insert(c);
                         } catch (InstantiationException e) {
@@ -187,7 +187,6 @@ public class ClientesServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -209,7 +208,6 @@ public class ClientesServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -228,7 +226,7 @@ public class ClientesServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
+    
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
