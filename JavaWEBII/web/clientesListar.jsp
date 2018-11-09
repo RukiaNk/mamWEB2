@@ -40,27 +40,23 @@
                 <div class="container">
                     <div class="row">
                         <div class="col m12">
-                            <h1 class="white-text">@Portal</h1>
-                            <h2 class="white-text">Olá, ${user.nome}</h2>
                             <div class="divider"></div>
-                            <div class="card white">
                                 <div class="card-content">
                                     <span class="card-title center-align"><h3>Cadastro de Clientes</h3></span>
                                 </div>
                             </div>
-                            <table class="responsive-table highlight centered">
+                            <table class="table">
                                 <thead>
-                                    <tr class="card blue-grey lighten-5">
+                                    <tr>
                                         <th>CPF</th>
                                         <th>Nome</th>
                                         <th>E-mail</th>
                                         <th>Visualizar / Alterar / Remover</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <c:forEach items="${lista}" var="aux">
-                                        <tr class='card'>
+                                        <tr>
                                             <td>${aux.cpfCliente}</td>
                                             <td>${aux.nomeCliente}</td>
                                             <td>${aux.emailCliente}</td>
@@ -68,25 +64,25 @@
                                                 <a href="ClientesServlet?action=show&id=${aux.idCliente}" class="btn-floating pulse green opt"><i class="small material-icons white-text">visibility</i></a>
                                                 <a href="ClientesServlet?action=formUpdate&id=${aux.idCliente}" class="btn-floating pulse yellow opt"><i class="small material-icons white-text">edit</i></a>
                                                 <a href="ClientesServlet?action=remove&id=${aux.idCliente}" onclick="confirmar(this,${aux.idCliente});" class="btn-floating pulse red opt"><i class="small material-icons white-text">delete</i></a>
-                                            </td></tr>
+                                            </td>
+                                        </tr>
                                         </c:forEach>
                                 </tbody>
                             </table>
                             <div style="height: 10px;"></div>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col left-align">
-                                        <a href="ClientesServlet?action=formNew" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
-                                    </div>
                                     <div class="col offset-s6">
                                         <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right">arrow_back</i></a>                                
+                                    </div>
+                                    <div class="col left-align">
+                                        <a href="inserir.jsp" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
                                     </div>
                                 </div>
                             </div>
                             <div style="height: 100px;"></div>
                         </div>
                     </div>
-                </div>
                 <%@include file="footer.jsp" %>
             </body>
         </html>

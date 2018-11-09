@@ -37,7 +37,7 @@
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
                             <div class="collection">
-                                <a href="ClientesServlet?action=list" class="collection-item btn btn-primary my-2">Cadastro de clientes</a>
+                                <a href="inserir.jsp" class="collection-item btn btn-primary my-2">Cadastro de clientes</a>
                                 <a href="LogoutServlet" class="collection-item btn btn-secondary my-2">Sair</a>
                             </div>
                         </div>

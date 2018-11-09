@@ -17,37 +17,35 @@
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
                 <title>Novo</title>
             </head>
+            <%@include file="menu.jsp" %>
             <div class="container">
                 <div class="row">
                     <div class="col offset-m2 m8">
-                        <h1 class="white-text">@Portal</h1>
-                        <h2 class="white-text">Olá, ${user.nome}</h2>
                         <div class="divider"></div>
-                        <div class="card">
                             <div class="card-content">
                                 <div class="card-title center-align">
                                     <h3>Dados do cliente</h3>
                                 </div>
                                 <form action="CadastrarUsuarioServlet" method="post">
                                     <div class="col m6">
-                                        <label>Nome:</label><input type="text" required
-                                                                   name="nome" size="100" maxlength="100" />
-                                        <label>Login</label><input type="text" required
-                                                                   name="login" size="100" maxlength="100" />
-                                        <label>Senha</label><input type="text" required
-                                                                   name="senha" size="100" maxlength="100" />
+                                        <label>Nome:</label>
+                                        <input type="text" required name="nome" size="100" maxlength="100"/>
+                                        <label>Login:</label>
+                                        <input type="text" required name="login" size="100" maxlength="100"/>
+                                        <label>Senha:</label>
+                                        <input type="text" required name="senha" size="100" maxlength="100"/>
                                     </div>
-
                                     <div class="container">
                                         <div class="row">
                                             <div class="col m5">
                                                 <button type="submit" class="waves-effect waves-teal btn">
-                                                    <i class="material-icons right">salvar</i>
+                                                    <i class="material-icons right">Salvar</i>
                                                 </button>
                                             </div>
-
                                         </div>
                                     </div>
                                 </form>
@@ -56,7 +54,6 @@
                     </div>
                 </div>
                 <div style="height: 100px;"></div>
-            </div>
             <%@include file="footer.jsp"%>
         </body>
     </html>
