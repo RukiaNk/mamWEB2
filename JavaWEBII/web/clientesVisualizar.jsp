@@ -15,6 +15,6 @@
     </head>
     <body>
         <jsp:useBean id="cli" class="com.ufpr.tads.web2.beans.Cliente" scope="request"/>
-        <h1>Visualizando <jsp:getProperty name="cli" property="nomeCliente"/></h1>
+        <h1>Visualizando <jsp:getProperty name="cliente" property="nomeCliente"/></h1>
     </body>
 </html>

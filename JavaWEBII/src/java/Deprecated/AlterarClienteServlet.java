@@ -52,7 +52,7 @@ public class AlterarClienteServlet extends HttpServlet {
             c.setEmailCliente(request.getParameter("email"));
             c.setDataCliente(request.getParameter("data"));
             c.setRuaCliente(request.getParameter("rua"));
-            c.setCidadeCliente(request.getParameter("cidade"));
+       //     c.setCidadeCliente(request.getParameter("cidade"));
             c.setCepCliente(request.getParameter("cep"));
             c.setNrCliente(Integer.parseInt(request.getParameter("numero")));
             cDao.alterarCliente(c);

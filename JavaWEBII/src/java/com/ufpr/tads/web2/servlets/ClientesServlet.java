@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpSession;
  * @author ananicole
  */
 @WebServlet(name = "ClientesServlet", urlPatterns = {"/ClientesServlet"})
-public class ClientesServlet {
+public class ClientesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,14 +59,17 @@ public class ClientesServlet {
             //Início Controller
             //Variaveis de controle
             String action = request.getParameter("action");
+            System.out.println(action);
             RequestDispatcher rd = null;
             int id = 0;
             List<Cliente> lista = null;
             Cliente c = null;
 
             //Identificação da action
-            if (!action.isEmpty()) {
+            if (action != null || !action.isEmpty()) {
                 switch (action) {
+                    case "list":
+                        break;
                     case "show":
                         id = parseInt((String) request.getParameter("id"));
                         if (id > 0) {
@@ -94,10 +98,10 @@ public class ClientesServlet {
 
                             //Carregar lista de estados
                             List<Estado> estados = ClienteFacade.listarEstados();
-                            rd = request.getRequestDispatcher("clientesAlterar.jsp");
                             request.setAttribute("estados", estados);
                             request.setAttribute("alterar", true);
                             request.setAttribute("cliente", cliente);
+                            rd = request.getRequestDispatcher("clientesAlterar.jsp");
                             rd.forward(request, response);
                         }
                         break;
@@ -122,7 +126,7 @@ public class ClientesServlet {
 
                     case "update":
                         //Preencher dados do cliente no enviados pelo formulário
-                      //  c = super.fillCliente(request);
+                        //  c = super.fillCliente(request);
                         ClienteFacade.update(c);
                         rd = request.getRequestDispatcher("ClientesServlet?action=list");
                         rd.forward(request, response);
@@ -140,7 +144,7 @@ public class ClientesServlet {
 
                     case "new":
                         //Preencher dados do cliente no enviados pelo formulário
-                      //  c = super.fillCliente(request);
+                        //  c = super.fillCliente(request);
                         try {
                             ClienteFacade.insert(c);
                         } catch (InstantiationException e) {
@@ -157,28 +161,27 @@ public class ClientesServlet {
                     default:
                         break;
                 }
-            } else {
-                //Por default, a controller lista os clientes
-                try {
-                    lista = ClienteFacade.selectAll();
-                } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                rd = request.getRequestDispatcher("clientesListar.jsp");
-                request.setAttribute("lista", lista);
-                rd.forward(request, response);
             }
+            //Por default, a controller lista os clientes
+            try {
+                lista = ClienteFacade.selectAll();
+            } catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            rd = request.getRequestDispatcher("clientesListar.jsp");
+            request.setAttribute("lista", lista);
+            rd.forward(request, response);
 
             //Fim Controller
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -187,16 +190,23 @@ public class ClientesServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (SQLException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ParseException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -208,16 +218,23 @@ public class ClientesServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (SQLException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
         } catch (ParseException ex) {
-            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientesServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -226,7 +243,6 @@ public class ClientesServlet {
      *
      * @return a String containing servlet description
      */
-    
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
