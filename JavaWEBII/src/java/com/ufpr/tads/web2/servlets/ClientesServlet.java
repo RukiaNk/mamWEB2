@@ -66,7 +66,7 @@ public class ClientesServlet extends HttpServlet {
             Cliente c = null;
 
             //Identificação da action
-            if (action != null || !action.isEmpty()) {
+            if (action != null) {
                 switch (action) {
                     case "list":
                         break;
@@ -99,9 +99,10 @@ public class ClientesServlet extends HttpServlet {
                             //Carregar lista de estados
                             List<Estado> estados = ClienteFacade.listarEstados();
                             request.setAttribute("estados", estados);
-                            request.setAttribute("alterar", true);
+                            //List<Cidade> cidade = ClienteFacade.
+                            request.setAttribute("alterar", "true");
                             request.setAttribute("cliente", cliente);
-                            rd = request.getRequestDispatcher("clientesAlterar.jsp");
+                            rd = request.getRequestDispatcher("clientesForm.jsp");
                             rd.forward(request, response);
                         }
                         break;
@@ -133,13 +134,12 @@ public class ClientesServlet extends HttpServlet {
                         break;
 
                     case "formNew":
-                        //Carregar lista de estados
-                        List<Estado> estados = ClienteFacade.listarEstados(); // TODO Auto-generated catch block
-                        // TODO Auto-generated catch block
-                        rd = request.getRequestDispatcher("clientesForm.jsp");
+                        List<Estado> estados = ClienteFacade.listarEstados();
                         request.setAttribute("estados", estados);
+                        //List<Cidade> cidade = ClienteFacade.
+                        request.setAttribute("alterar", "false");
+                        rd = request.getRequestDispatcher("clientesForm.jsp");
                         rd.forward(request, response);
-
                         break;
 
                     case "new":

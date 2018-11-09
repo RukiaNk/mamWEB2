@@ -76,7 +76,7 @@
                                         <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right">arrow_back</i></a>                                
                                     </div>
                                     <div class="col left-align">
-                                        <a href="inserir.jsp" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
+                                        <a href="ClientesServlet?action=formNew" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
                                     </div>
                                 </div>
                             </div>
