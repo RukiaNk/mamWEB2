@@ -29,11 +29,14 @@
                 <style type="text/css">@import url("materialize/css/materialize.min.css");</style>
                 <style type="text/css">@import url("materialize/css/web2.css");</style>
                 <script type="text/javascript" src="materialize/js/web2.js"></script>
+                <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                 <link rel="icon" href="java.ico">
                 <title>Portal</title>
             </head>
             <body class="bgimg">
+                <%@include file="menu.jsp" %>
                 <div class="container">
                     <div class="row">
                         <div class="col m12">

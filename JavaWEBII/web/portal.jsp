@@ -22,21 +22,23 @@
                 <style type="text/css">@import url("materialize/css/materialize.css");</style>
                 <style type="text/css">@import url("materialize/css/materialize.min.css");</style>
                 <style type="text/css">@import url("materialize/css/web2.css");</style>
+        <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                 <link rel="icon" href="java.ico">
                 <title>Portal</title>
             </head>
+            <%@include file="menu.jsp" %>
             <body class="bgimg">
                 <div class="container">
-                    <div class="row">
-                        <div class="col offset-m3 m6">
-                            <h1 class="white-text">@Portal</h1>
-                            <h2 class="white-text">Olá, ${user.nome}</h2>
+                    <div class="row">           
+                        <div class="container">
+                            <h1 class="jumbotron-heading">Olá, ${user.nome}</h1>
                             <div class="divider"></div>
                             <div style="height: 50px;"></div>
                             <div class="collection">
-                                <a href="ClientesServlet?action=list" class="collection-item">Cadastro de clientes</a>
-                                <a href="LogoutServlet" class="collection-item">Sair</a>
+                                <a href="ClientesServlet?action=list" class="collection-item btn btn-primary my-2">Cadastro de clientes</a>
+                                <a href="LogoutServlet" class="collection-item btn btn-secondary my-2">Sair</a>
                             </div>
                         </div>
                     </div>
