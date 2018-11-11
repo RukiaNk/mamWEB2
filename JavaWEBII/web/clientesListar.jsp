@@ -3,88 +3,132 @@
     Created on : 21/09/2018, 01:56:58
     Author     : ananicole
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.io.IOException"%>
-<%@page import="com.sun.faces.application.WebPrintWriter"%>
-<%@page import="java.io.PrintWriter"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page errorPage="/erro.jsp"%>
 <%@page import="com.ufpr.tads.web2.beans.Cliente"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ufpr.tads.web2.beans.LoginBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page errorPage="erro.jsp" %>
-<%-- Procura se existe um usuário instanciado --%>
-<c:choose>
-    <c:when test="${empty sessionScope.user}">
-        <jsp:forward page="index.jsp">
-            <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema." />
-        </jsp:forward>
-    </c:when>
-    <c:otherwise>
-        <!DOCTYPE html>
-        <html>
-            <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <style type="text/css">@import url("materialize/css/materialize.css");</style>
-                <style type="text/css">@import url("materialize/css/materialize.min.css");</style>
-                <style type="text/css">@import url("materialize/css/web2.css");</style>
-                <script type="text/javascript" src="materialize/js/web2.js"></script>
-                <link href="resources/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-                <link rel="stylesheet" href="resources/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
-                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-                <link rel="icon" href="java.ico">
-                <title>Portal</title>
-            </head>
-            <body class="bgimg">
-                <%@include file="menu.jsp" %>
-                <div class="container" >
-                    <div class="row">
-                        <div class="col m12">
-                            <div class="divider"></div>
-                                <div class="card-content pt-4">
-                                    <span class="card-title center-align"><h3>Clientes</h3></span>
-                                </div>
-                            </div>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>CPF</th>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>Visualizar / Alterar / Remover</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${lista}" var="aux">
-                                        <tr>
-                                            <td>${aux.cpfCliente}</td>
-                                            <td>${aux.nomeCliente}</td>
-                                            <td>${aux.emailCliente}</td>
-                                            <td class="center-align" style="width: 220px;">
-                                                <a href="ClientesServlet?action=show&id=${aux.idCliente}" class="btn-floating pulse green opt"><i class="small material-icons white-text">visibility</i></a>
-                                                <a href="ClientesServlet?action=formUpdate&id=${aux.idCliente}" class="btn-floating pulse yellow opt"><i class="small material-icons white-text">edit</i></a>
-                                                <a href="ClientesServlet?action=remove&id=${aux.idCliente}" onclick="confirmar(this,${aux.idCliente});" class="btn-floating pulse red opt"><i class="small material-icons white-text">delete</i></a>
-                                            </td>
-                                        </tr>
-                                        </c:forEach>
-                                </tbody>
-                            </table>
-                            <div style="height: 10px;"></div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col offset-s6">
-                                        <a href="portal.jsp" class="waves-effect waves-teal btn">Voltar<i class="material-icons right">arrow_back</i></a>                                
-                                    </div>
-                                    <div class="col left-align">
-                                        <a href="ClientesServlet?action=formNew" class="waves-effect waves-teal btn">Novo<i class="material-icons right">add</i></a>                                
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="height: 100px;"></div>
-                        </div>
-                    </div>
-                <%@include file="footer.jsp" %>
-            </body>
-        </html>
-    </c:otherwise>    
-</c:choose>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript" >
+        function getCidades(idEstado){
+            var url = "AJAXServlet";
+            $.ajax({
+                url : url, 
+                data : {
+                estadoId : idEstado
+                }, 
+                dataType : 'json',
+                success : function(data) {
+                    
+                // alert(JSON.stringify(data));
+                $("#cidade").empty();
+                $.each(data, function(i, obj) {
+                $("#cidade").append('<option value=' + obj.idCidade + '>' + obj.nomeCidade + '</option>');
+                });
+                },
+                error : function(request, textStatus, errorThrown) {
+                alert(request.status + ', Error: ' + request.statusText);
+                            alert ("Erro AJAX");
+                }
+            });
+        }
+        </script>
+
+    </head>
+    <body>
+        <jsp:useBean id="login" class="com.ufpr.tads.web2.beans.LoginBean" scope="session"/>
+
+        <c:if test="${empty sessionScope.login}">
+            <jsp:forward page="/index.jsp">
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema"/>
+            </jsp:forward>
+        </c:if>
+          
+        
+        
+        
+      
+        <c:if test="${alterar2 != null}">
+            <h1>Alterar Dados do cliente</h1>
+
+            <form action="ClientesServlet?action=update" method="POST">
+                Nome: <input type="text" name="nome" value=${alterar2.nomeCliente} required maxlength="100"> <br/>
+                Id: <input type="text" name="id" value=${alterar2.idCliente}> <br/>
+                CPF: <input type="text" name="cpf" value=${alterar2.cpfCliente} required
+                            maxlength="11"  minlength="11" pattern="[0-9]{11}" title="only numbers"> <br/>
+                Email: <input type="text" name="email" value=${alterar2.emailCliente} maxlength="100"
+                              required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="xxx@xxx.xxx"> <br/>
+                Data: <input type="date" name="data" value=${alterar2.dataCliente} required> <br/>
+                Rua: <input type="text" name="rua" value=${alterar2.ruaCliente} required maxlength="100"> <br/>
+                Número: <input type="number" name="numero" value=${alterar2.nrCliente} 
+                               required pattern="[0-9]"> <br/>
+                CEP: <input type="text" name="cep" value=${alterar2.cepCliente} required
+                            pattern="[0-9]{8}" title="only numbers" maxlength="8"> <br/>
+                Estado:
+                <select name="estado" id ="estado" onChange="getCidades(estado.value)" required>
+                    <option value="">Selecione</option>
+                        <c:forEach items="${listaestados}" var="estado">  
+                            <option value="${estado.idEstado}">${estado.nomeEstado}</option>
+                        </c:forEach>
+                </select>
+                <br/>
+                Cidade:
+                <select name="cidade" id="cidade" required>
+                    <option value="">Selecione</option>           
+                </select>
+                </br></br>
+                <input type="submit" value="Alterar"> <input type="submit" value="Cancelar" formaction="ClientesServlet">
+            </form>
+        </c:if>
+            
+            
+        <c:if test="${alterar2 == null}">
+
+            <h1>Novo do cliente</h1>
+
+            <form action="ClientesServlet?action=new" method="POST">
+                Nome: <input type="text" name="nome" required maxlength="100"> <br/>
+                CPF: <input type="text" name="cpf" required
+                            maxlength="11" minlength="11" pattern="[0-9]{11}" title="only numbers"><br/>
+                Email: <input type="text" name="email" required maxlength='100'
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="xxx@xxx.xxx"><br/>
+                Data: <input type="date" name="data" required><br/>
+                Rua: <input type="text" name="rua" required maxlength='100'><br/>
+                Número: <input type="number" name="numero" required><br/>
+                CEP: <input type="text" name="cep" required
+                            maxlength="8" pattern="[0-9]{8}" title="only numbers"><br/>
+                
+                Estado:
+                <select name="estado" id ="estado" onChange="getCidades(estado.value)" required>
+                    <option value="">Selecione</option>
+                        <c:forEach items="${listaestados}" var="estado">  
+                            <option value="${estado.idEstado}">${estado.nomeEstado}</option>
+                        </c:forEach>
+                </select>
+                <br/>
+                
+
+                Cidade AJAX:
+                <select name="cidade" id="cidade" required>
+                    <option value="">Selecione</option>
+                </select>
+                <br/>
+                <br/><br/>
+                <input type="submit" value="Salvar"> <input type="submit" value="Cancelar" formaction="ClientesServlet">
+            </form>
+        </c:if>
+        </br></br> <a href="#void" onclick="getCidades();" style="color: darkblue">Carregar Cidade</a>
+    </body>
+</html>
