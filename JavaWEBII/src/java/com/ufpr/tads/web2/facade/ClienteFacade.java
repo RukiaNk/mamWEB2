@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 public class ClienteFacade implements Serializable {
 
     public static List<Cliente> selectAll() throws InstantiationException, IllegalAccessException {
-        //Busca lista de clientes no banco de dados e retorna um List<Cliente>
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = new ArrayList<Cliente>();
         try {
@@ -37,7 +36,6 @@ public class ClienteFacade implements Serializable {
     }
 
     public static Cliente select(int id) {
-        //Busca id do cliente a ser visualizado no parametro da página
         ClienteDAO dao = new ClienteDAO();
         Cliente c = dao.buscarCliente(id);
         return c;
@@ -55,7 +53,6 @@ public class ClienteFacade implements Serializable {
 
     public static void delete(int id) throws InstantiationException, IllegalAccessException {
         try {
-            //Busca cliente no banco de dados e deleta do banco de dados
             ClienteDAO dao = new ClienteDAO();
             dao.deletarCliente(id);
         } catch (SQLException ex) {
@@ -72,4 +69,20 @@ public class ClienteFacade implements Serializable {
         CidadeDAO cDao = new CidadeDAO();
         return cDao.buscaCidade(id);
     }
+    
+    public static boolean verifyCpf(String cpf) {
+		ClienteDAO dao = new ClienteDAO();
+		if(dao.verificaCpf(cpf))
+			return true;
+		else
+			return false;
+	}
+
+	public static boolean verifyEmail(String email) {
+		ClienteDAO dao = new ClienteDAO();
+		if(dao.verificaEmail(email))
+			return true;
+		else
+			return false;
+	}
 }

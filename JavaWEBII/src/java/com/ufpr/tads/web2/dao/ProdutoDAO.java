@@ -49,6 +49,35 @@ public class ProdutoDAO {
         }
     }
 
+    public void alterarProduto(Produto p) throws InstantiationException, IllegalAccessException, SQLException {
+		try {
+	        con = new ConnectionFactory().getConnection();
+	        stmt = con.prepareStatement(UPDATE);
+            stmt.setString(1, p.getNomeProd());
+            stmt.setInt(2, p.getIdProd());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            con.close();
+        }
+	}
+    
+	public void adicionarProduto(String p) throws InstantiationException, IllegalAccessException, SQLException {
+		try {
+	        con = new ConnectionFactory().getConnection();
+	        stmt = con.prepareStatement(INSERT);
+            stmt.setString(1, p);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            con.close();
+        }
+	}
+	
     public Produto buscaProduto(int id) {
         Produto aux = new Produto();
         try {
@@ -70,4 +99,17 @@ public class ProdutoDAO {
         }
         return aux;
     }
+    
+    public void deletarProduto(int id) throws InstantiationException, IllegalAccessException, SQLException {
+        try {
+        	con = new ConnectionFactory().getConnection();
+        	stmt = con.prepareStatement(DELETE);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally{
+            stmt.close();
+        }
+	}
 }

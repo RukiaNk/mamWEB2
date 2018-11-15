@@ -153,5 +153,38 @@ public class ClienteDAO {
             stmt.close();
         }
     }
+    public boolean verificaCpf(String cpf) {
+    	try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(VERIFY_CPF);
+            stmt.setString(1, cpf);
+            rs = stmt.executeQuery();
+            if (rs.next())
+            	return true;
+            else
+            	return false;
+    	} catch (Exception e) {
+    		throw new RuntimeException(e);
+    	}finally{
+    		try {con.close();} catch (SQLException e) {}
+    	}
+    }
+
+    public boolean verificaEmail(String email) {
+    	try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(VERIFY_EMAIL);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+            if (rs.next())
+            	return true;
+            else
+            	return false;
+    	} catch (Exception e) {
+    		throw new RuntimeException(e);
+    	}finally{
+    		try {con.close();} catch (SQLException e) {}
+    	}
+    }
 
 }

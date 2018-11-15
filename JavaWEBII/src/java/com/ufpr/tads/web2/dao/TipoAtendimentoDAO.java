@@ -49,12 +49,12 @@ public class TipoAtendimentoDAO {
         }
     }
 
-    public TipoAtendimento buscaTipoAtend(int id) {
+    public TipoAtendimento buscaTipoAtend(int idAtendimento) {
         TipoAtendimento aux = new TipoAtendimento();
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(SELECT);
-            stmt.setInt(1, id);
+            stmt.setInt(1, idAtendimento);
             rs = stmt.executeQuery();
             if (rs.next()) {
                 aux.setIdTipo(rs.getInt(1));
