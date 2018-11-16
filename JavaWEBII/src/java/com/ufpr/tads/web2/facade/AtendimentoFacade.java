@@ -17,6 +17,8 @@ import com.ufpr.tads.web2.beans.Produto;
 import com.ufpr.tads.web2.beans.TipoAtendimento;
 import com.ufpr.tads.web2.dao.ProdutoDAO;
 import com.ufpr.tads.web2.dao.TipoAtendimentoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -112,20 +114,14 @@ public class AtendimentoFacade {
         return c;
     }
 
-    public static List<Atendimento> searchAll() {
+    public static List<Atendimento> searchAll(int id) {
         AtendimentoDAO dao = new AtendimentoDAO();
+        List<Atendimento> lAtend = new ArrayList<>();
         try {
-            return dao.listarAtendimentos();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            lAtend = dao.listarAtendimentos(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(AtendimentoFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return lAtend;
     }
 }

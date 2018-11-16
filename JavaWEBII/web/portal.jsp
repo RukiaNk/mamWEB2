@@ -37,24 +37,24 @@
                 <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema"/>
             </jsp:forward>
         </c:if>
-        
+
         <nav class="w3-sidebar w3-black w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-          <div class="w3-container">
-            <h3 class="w3-padding-64"><b>Menu</b></h3>
-          </div>
-          <div class="w3-bar-block">
-            <a href="ClientesServlet" class="w3-bar-item w3-button w3-hover-white">Cadastro de Clientes</a>
-            <a href="AtendimentoServlet" class="w3-bar-item w3-button w3-hover-white">Listar Atendimentos</a>
-            <a href="AtendimentoServlet?action=atender" class="w3-bar-item w3-button w3-hover-white">Efetuar novo Atendimento</a>
-            <a href="GeradorRelatorio?action=todosClientes">Relatório - Todos os clientes</a>
-            <a href="GeradorRelatorio?action=AtendimentosResolvidos">Relatório - Atendimentos Resolvidos</a>
-            <a href="LogoutServlet" class="w3-bar-item w3-button w3-hover-white">Sair</a>
-          </div>
+            <div class="w3-container">
+                <h3 class="w3-padding-64"><b>Menu</b></h3>
+            </div>
+            <div class="w3-bar-block">
+                <a href="ClientesServlet" class="w3-bar-item w3-button w3-hover-white">Cadastro de Clientes</a>
+                <a href="AtendimentoServlet" class="w3-bar-item w3-button w3-hover-white">Listar Atendimentos</a>
+                <a href="AtendimentoServlet?action=atender" class="w3-bar-item w3-button w3-hover-white">Efetuar novo Atendimento</a>
+                <a href="GeradorRelatorio?action=todosClientes">Relatório - Todos os clientes</a>
+                <a href="GeradorRelatorio?action=AtendimentosResolvidos">Relatório - Atendimentos Resolvidos</a>
+                <a href="LogoutServlet" class="w3-bar-item w3-button w3-hover-white">Sair</a>
+            </div>
         </nav>
 
         <div class="w3-right" style="padding-right: 150px;">
             <p>
-                ${login.nomeUsuario}
+                ${login.nome}
             </p>
             <br>
 
@@ -64,34 +64,16 @@
                 Senha: <input type='password' name='senha' value='' required/>
                 <input type='submit' name='btnEnviar' value='Enviar'>
             </form>
-
-            <jsp:useBean id="usuarioDAO" class="com.ufpr.tads.web2.dao.UsuarioDAO" />
-            <c:set var="usuarios" value= "${usuarioDAO.selecionar()}" />
-            <c:if test="${fn:length(usuarios) > 0}">
-                <table>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Login</th>
-                        <th>Senha</th>
-                    </tr>
-                    <c:forEach var="usu" items="${usuarios}">
-                        <tr>
-                            <td> ${usu.getNomeUsuario()} </td>
-                            <td> ${usu.getLoginUsuario()} </td>
-                            <td> ${usu.getSenhaUsuario()} </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </c:if>
+            
             <br>
 
             <a href ='LogoutServlet' style="color: darkblue">Encerrar sessão</a>
 
             <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
                 <jsp:useBean id="configuracao" class="com.ufpr.tads.web2.beans.ConfigBean" scope="application" />
-              <footer class="w3-right">
-                  Em caso de problemas contactar o administrador: <jsp:getProperty name="configuracao" property="email" />
-              </footer>
+                <footer class="w3-right">
+                    Em caso de problemas contactar o administrador: ${login.email}
+                </footer>
             </div>
         </div>
     </body>

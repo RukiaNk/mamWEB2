@@ -16,38 +16,19 @@ import com.ufpr.tads.web2.dao.TipoAtendimentoDAO;
  * @author ananicole
  */
 public class TipoAtendimentoFacade {
+
     public static List<TipoAtendimento> searchAll() {
-		TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
-		try {
-			return dao.listarTipoAtend();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public static TipoAtendimento search(int idAtendimento) {
-		try {
-			return new TipoAtendimentoDAO().buscaTipoAtend((idAtendimento));
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+        TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
+        try {
+            return dao.listarTipoAtend();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-
+    public static TipoAtendimento search(int idAtendimento) {
+        TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
+        return dao.buscaTipoAtend((idAtendimento));
+    }
 }

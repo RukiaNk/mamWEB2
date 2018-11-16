@@ -9,6 +9,7 @@ import com.mysql.jdbc.StringUtils;
 import com.ufpr.tads.web2.beans.LoginBean;
 import com.ufpr.tads.web2.beans.Usuario;
 import com.ufpr.tads.web2.dao.ProjectDao;
+import com.ufpr.tads.web2.dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         ProjectDao dao = new ProjectDao();
+        UsuarioDAO uDao = new UsuarioDAO();
         //marcos eu não sei porque ele ta dando erro aqui, porque na minha cabeça funciona = Tu não tava fazendo request.getParameter pra senha
         Usuario u = dao.validaLogin(request.getParameter("login"), request.getParameter("senha"));
         if (u != null) {
