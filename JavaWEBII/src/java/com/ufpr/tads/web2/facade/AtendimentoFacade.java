@@ -76,6 +76,10 @@ public class AtendimentoFacade {
         return lista;
     }
     
+    public static Atendimento search(int id) {
+		return new AtendimentoDAO().buscarAtendimento(id);
+	}
+    
     public static TipoAtendimento selectTipo(int id) {
         //Busca id do produto a ser visualizado no parametro da página
         TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
