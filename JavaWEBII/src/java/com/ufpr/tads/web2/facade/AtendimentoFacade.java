@@ -5,21 +5,46 @@
  */
 package com.ufpr.tads.web2.facade;
 
-import com.ufpr.tads.web2.beans.Atendimento;
-import com.ufpr.tads.web2.beans.Produto;
-import com.ufpr.tads.web2.beans.TipoAtendimento;
 import com.ufpr.tads.web2.dao.AtendimentoDAO;
-import com.ufpr.tads.web2.dao.ProdutoDAO;
-import com.ufpr.tads.web2.dao.TipoAtendimentoDAO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ufpr.tads.web2.beans.Atendimento;
+import com.ufpr.tads.web2.beans.Cliente;
+import com.ufpr.tads.web2.beans.Produto;
+import com.ufpr.tads.web2.beans.TipoAtendimento;
+import com.ufpr.tads.web2.dao.ProdutoDAO;
+import com.ufpr.tads.web2.dao.TipoAtendimentoDAO;
 
 /**
  *
  * @author Marcos
  */
 public class AtendimentoFacade {
+
+    public static ArrayList<List<?>> form() {
+        ArrayList<List<?>> form = new ArrayList<List<?>>();
+        try {
+            //Busca clientes
+            List<Cliente> clientes = ClienteFacade.selectAll();
+            form.add(clientes);
+            //Busca produtos
+            List<Produto> produtos = ProdutoFacade.searchAll();
+            List<TipoAtendimento> tiposAtendimento = TipoAtendimentoFacade.searchAll();
+            form.add(tiposAtendimento);
+            form.add(produtos);
+            //Busca tipos de atendimentos
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return form;
+    }
 
     public static List<Atendimento> selectAllAtend(int id) throws InstantiationException, IllegalAccessException {
         //Busca lista de Atendimentos no banco de dados e retorna um List<Atendimento>
@@ -63,7 +88,7 @@ public class AtendimentoFacade {
         Produto c = dao.buscaProduto(id);
         return c;
     }
-    
+
     public static List<TipoAtendimento> selectAllTipo() throws InstantiationException, IllegalAccessException {
         //Busca lista de produttos no banco de dados e retorna um List<Produto>
         TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
@@ -75,11 +100,11 @@ public class AtendimentoFacade {
         }
         return lista;
     }
-    
+
     public static Atendimento search(int id) {
-		return new AtendimentoDAO().buscarAtendimento(id);
-	}
-    
+        return new AtendimentoDAO().buscaAtendimento(id);
+    }
+
     public static TipoAtendimento selectTipo(int id) {
         //Busca id do produto a ser visualizado no parametro da página
         TipoAtendimentoDAO dao = new TipoAtendimentoDAO();
@@ -87,4 +112,20 @@ public class AtendimentoFacade {
         return c;
     }
 
+    public static List<Atendimento> searchAll() {
+        AtendimentoDAO dao = new AtendimentoDAO();
+        try {
+            return dao.listarAtendimentos();
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

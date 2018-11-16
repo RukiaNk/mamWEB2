@@ -33,7 +33,7 @@ public class ProdutoFacade {
 		return null;
 	}
 
-	public static Produto search(int idProduto) {
+	public static Produto search(int id) {
 		try {
 			return new ProdutoDAO().buscaProduto(id);
 		} catch (InstantiationException e) {
